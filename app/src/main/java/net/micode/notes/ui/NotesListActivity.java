@@ -77,7 +77,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashSet;
-
+/* 总入口 */
 public class NotesListActivity extends Activity implements OnClickListener, OnItemLongClickListener {
     private static final int FOLDER_NOTE_LIST_QUERY_TOKEN = 0;
 
@@ -210,10 +210,10 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
     }
 
     private void initResources() {
-        mContentResolver = this.getContentResolver();
-        mBackgroundQueryHandler = new BackgroundQueryHandler(this.getContentResolver());
+        mContentResolver = this.getContentResolver(); // 类似数据库句柄
+        mBackgroundQueryHandler = new BackgroundQueryHandler(this.getContentResolver()); // 后台查询任务
         mCurrentFolderId = Notes.ID_ROOT_FOLDER;
-        mNotesListView = (ListView) findViewById(R.id.notes_list);
+        mNotesListView = (ListView) findViewById(R.id.notes_list); // 创建NotesList视图（CTRL跟进）
         mNotesListView.addFooterView(LayoutInflater.from(this).inflate(R.layout.note_list_footer, null),
                 null, false);
         mNotesListView.setOnItemClickListener(new OnListItemClickListener());
@@ -875,7 +875,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         Intent intent = new Intent(from, NotesPreferenceActivity.class);
         from.startActivityIfNeeded(intent, -1);
     }
-
+    /* 列表内容点击事件 */
     private class OnListItemClickListener implements OnItemClickListener {
 
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
