@@ -31,11 +31,11 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/title_bar_bg"
-            android:visibility="gone"
             android:gravity="center_vertical"
             android:singleLine="true"
             android:textColor="#FFEAD1AE"
-            android:textSize="@dimen/text_font_size_medium" />
+            android:textSize="@dimen/text_font_size_medium"
+            android:visibility="gone" />
 
         <ListView
             android:id="@+id/notes_list"

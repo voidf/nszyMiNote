@@ -30,7 +30,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
-
+/* 绑定数据库的数据到主界面列表里面的视图元素上 */
 public class NotesListAdapter extends CursorAdapter {
     private static final String TAG = "NotesListAdapter";
     private Context mContext;
@@ -45,7 +45,7 @@ public class NotesListAdapter extends CursorAdapter {
 
     public NotesListAdapter(Context context) {
         super(context, null);
-        mSelectedIndex = new HashMap<Integer, Boolean>();
+        mSelectedIndex = new HashMap<Integer, Boolean>(); // 推测是多选用的
         mContext = context;
         mNotesCount = 0;
     }

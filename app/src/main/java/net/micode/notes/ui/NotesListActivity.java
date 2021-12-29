@@ -215,18 +215,18 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         mCurrentFolderId = Notes.ID_ROOT_FOLDER;
         mNotesListView = (ListView) findViewById(R.id.notes_list); // 创建NotesList视图（CTRL跟进）
         mNotesListView.addFooterView(LayoutInflater.from(this).inflate(R.layout.note_list_footer, null),
-                null, false);
-        mNotesListView.setOnItemClickListener(new OnListItemClickListener());
-        mNotesListView.setOnItemLongClickListener(this);
-        mNotesListAdapter = new NotesListAdapter(this);
+                null, false); // 用于通知用户列表划到底了的视图元素
+        mNotesListView.setOnItemClickListener(new OnListItemClickListener()); // 点击监听
+        mNotesListView.setOnItemLongClickListener(this); // 长按监听
+        mNotesListAdapter = new NotesListAdapter(this); // ListView的元素管理器
         mNotesListView.setAdapter(mNotesListAdapter);
-        mAddNewNote = (Button) findViewById(R.id.btn_new_note);
+        mAddNewNote = (Button) findViewById(R.id.btn_new_note); // 拿"写便签"按钮
         mAddNewNote.setOnClickListener(this);
-        mAddNewNote.setOnTouchListener(new NewNoteOnTouchListener());
+        mAddNewNote.setOnTouchListener(new NewNoteOnTouchListener()); // 新建便签
         mDispatch = false;
         mDispatchY = 0;
         mOriginY = 0;
-        mTitleBar = (TextView) findViewById(R.id.tv_title_bar);
+        mTitleBar = (TextView) findViewById(R.id.tv_title_bar); // 书签图标
         mState = ListEditState.NOTE_LIST;
         mModeCallBack = new ModeCallback();
     }
