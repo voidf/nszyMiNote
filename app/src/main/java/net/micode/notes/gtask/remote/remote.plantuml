@@ -1,0 +1,159 @@
+@startuml
+
+title __REMOTE's Class Diagram__\n
+
+  namespace net.micode.notes {
+    namespace gtask.remote {
+      class net.micode.notes.gtask.remote.GTaskASyncTask {
+          {static} - GTASK_SYNC_NOTIFICATION_ID : int
+          - mContext : Context
+          - mNotifiManager : NotificationManager
+          + GTaskASyncTask()
+          + cancelSync()
+          + publishProgess()
+          # doInBackground()
+          # onPostExecute()
+          # onProgressUpdate()
+          - showNotification()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace gtask.remote {
+      interface net.micode.notes.gtask.remote.GTaskASyncTask.OnCompleteListener {
+          {abstract} + onComplete()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace gtask.remote {
+      class net.micode.notes.gtask.remote.GTaskClient {
+          {static} - GTASK_GET_URL : String
+          {static} - GTASK_POST_URL : String
+          {static} - GTASK_URL : String
+          {static} - TAG : String
+          - mAccount : Account
+          - mActionId : int
+          - mClientVersion : long
+          - mGetUrl : String
+          - mHttpClient : DefaultHttpClient
+          {static} - mInstance : GTaskClient
+          - mLastLoginTime : long
+          - mLoggedin : boolean
+          - mPostUrl : String
+          - mUpdateArray : JSONArray
+          + addUpdateNode()
+          + commitUpdate()
+          + createTask()
+          + createTaskList()
+          + deleteNode()
+          {static} + getInstance()
+          + getSyncAccount()
+          + getTaskList()
+          + getTaskLists()
+          + login()
+          + moveTask()
+          + resetUpdateArray()
+          - GTaskClient()
+          - createHttpPost()
+          - getActionId()
+          - getResponseContent()
+          - loginGoogleAccount()
+          - loginGtask()
+          - postRequest()
+          - tryToLoginGtask()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace gtask.remote {
+      class net.micode.notes.gtask.remote.GTaskManager {
+          {static} + STATE_INTERNAL_ERROR : int
+          {static} + STATE_NETWORK_ERROR : int
+          {static} + STATE_SUCCESS : int
+          {static} + STATE_SYNC_CANCELLED : int
+          {static} + STATE_SYNC_IN_PROGRESS : int
+          {static} - TAG : String
+          - mActivity : Activity
+          - mCancelled : boolean
+          - mContentResolver : ContentResolver
+          - mContext : Context
+          - mGTaskHashMap : HashMap<String, Node>
+          - mGTaskListHashMap : HashMap<String, TaskList>
+          - mGidToNid : HashMap<String, Long>
+          {static} - mInstance : GTaskManager
+          - mLocalDeleteIdMap : HashSet<Long>
+          - mMetaHashMap : HashMap<String, MetaData>
+          - mNidToGid : HashMap<Long, String>
+          - mSyncing : boolean
+          + cancelSync()
+          {static} + getInstance()
+          + getSyncAccount()
+          + setActivityContext()
+          + sync()
+          - GTaskManager()
+          - addLocalNode()
+          - addRemoteNode()
+          - doContentSync()
+          - initGTaskList()
+          - refreshLocalSyncId()
+          - syncContent()
+          - syncFolder()
+          - updateLocalNode()
+          - updateRemoteMeta()
+          - updateRemoteNode()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace gtask.remote {
+      class net.micode.notes.gtask.remote.GTaskSyncService {
+          {static} + ACTION_CANCEL_SYNC : int
+          {static} + ACTION_INVALID : int
+          {static} + ACTION_START_SYNC : int
+          {static} + ACTION_STRING_NAME : String
+          {static} + GTASK_SERVICE_BROADCAST_IS_SYNCING : String
+          {static} + GTASK_SERVICE_BROADCAST_NAME : String
+          {static} + GTASK_SERVICE_BROADCAST_PROGRESS_MSG : String
+          {static} - mSyncProgress : String
+          {static} - mSyncTask : GTaskASyncTask
+          {static} + cancelSync()
+          {static} + getProgressString()
+          {static} + isSyncing()
+          + onBind()
+          + onCreate()
+          + onLowMemory()
+          + onStartCommand()
+          + sendBroadcast()
+          {static} + startSync()
+          - cancelSync()
+          - startSync()
+      }
+    }
+  }
+  
+
+  net.micode.notes.gtask.remote.GTaskASyncTask -up-|> android.os.AsyncTask
+  net.micode.notes.gtask.remote.GTaskASyncTask o-- net.micode.notes.gtask.remote.GTaskASyncTask.OnCompleteListener : mOnCompleteListener
+  net.micode.notes.gtask.remote.GTaskASyncTask o-- net.micode.notes.gtask.remote.GTaskManager : mTaskManager
+  net.micode.notes.gtask.remote.GTaskASyncTask +-down- net.micode.notes.gtask.remote.GTaskASyncTask.OnCompleteListener
+  net.micode.notes.gtask.remote.GTaskManager o-- net.micode.notes.gtask.data.TaskList : mMetaList
+  net.micode.notes.gtask.remote.GTaskSyncService -up-|> android.app.Service
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

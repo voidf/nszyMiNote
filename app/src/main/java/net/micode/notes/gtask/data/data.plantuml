@@ -1,0 +1,225 @@
+@startuml
+
+title __DATA's Class Diagram__\n
+
+  namespace net.micode.notes {
+    namespace gtask.data {
+      class net.micode.notes.gtask.data.MetaData {
+          {static} - TAG : String
+          - mRelatedGid : String
+          + getLocalJSONFromContent()
+          + getRelatedGid()
+          + getSyncAction()
+          + isWorthSaving()
+          + setContentByLocalJSON()
+          + setContentByRemoteJSON()
+          + setMeta()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace gtask.data {
+      abstract class net.micode.notes.gtask.data.Node {
+          {static} + SYNC_ACTION_ADD_LOCAL : int
+          {static} + SYNC_ACTION_ADD_REMOTE : int
+          {static} + SYNC_ACTION_DEL_LOCAL : int
+          {static} + SYNC_ACTION_DEL_REMOTE : int
+          {static} + SYNC_ACTION_ERROR : int
+          {static} + SYNC_ACTION_NONE : int
+          {static} + SYNC_ACTION_UPDATE_CONFLICT : int
+          {static} + SYNC_ACTION_UPDATE_LOCAL : int
+          {static} + SYNC_ACTION_UPDATE_REMOTE : int
+          - mDeleted : boolean
+          - mGid : String
+          - mLastModified : long
+          - mName : String
+          + Node()
+          {abstract} + getCreateAction()
+          + getDeleted()
+          + getGid()
+          + getLastModified()
+          {abstract} + getLocalJSONFromContent()
+          + getName()
+          {abstract} + getSyncAction()
+          {abstract} + getUpdateAction()
+          {abstract} + setContentByLocalJSON()
+          {abstract} + setContentByRemoteJSON()
+          + setDeleted()
+          + setGid()
+          + setLastModified()
+          + setName()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace gtask.data {
+      class net.micode.notes.gtask.data.SqlData {
+          {static} + DATA_CONTENT_COLUMN : int
+          {static} + DATA_CONTENT_DATA_1_COLUMN : int
+          {static} + DATA_CONTENT_DATA_3_COLUMN : int
+          {static} + DATA_ID_COLUMN : int
+          {static} + DATA_MIME_TYPE_COLUMN : int
+          {static} + PROJECTION_DATA : String[]
+          {static} - INVALID_ID : int
+          {static} - TAG : String
+          - mContentResolver : ContentResolver
+          - mDataContent : String
+          - mDataContentData1 : long
+          - mDataContentData3 : String
+          - mDataId : long
+          - mDataMimeType : String
+          - mDiffDataValues : ContentValues
+          - mIsCreate : boolean
+          + SqlData()
+          + SqlData()
+          + commit()
+          + getContent()
+          + getId()
+          + setContent()
+          - loadFromCursor()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace gtask.data {
+      class net.micode.notes.gtask.data.SqlNote {
+          {static} + ALERTED_DATE_COLUMN : int
+          {static} + BG_COLOR_ID_COLUMN : int
+          {static} + CREATED_DATE_COLUMN : int
+          {static} + GTASK_ID_COLUMN : int
+          {static} + HAS_ATTACHMENT_COLUMN : int
+          {static} + ID_COLUMN : int
+          {static} + LOCAL_MODIFIED_COLUMN : int
+          {static} + MODIFIED_DATE_COLUMN : int
+          {static} + NOTES_COUNT_COLUMN : int
+          {static} + ORIGIN_PARENT_ID_COLUMN : int
+          {static} + PARENT_ID_COLUMN : int
+          {static} + PROJECTION_NOTE : String[]
+          {static} + SNIPPET_COLUMN : int
+          {static} + SYNC_ID_COLUMN : int
+          {static} + TYPE_COLUMN : int
+          {static} + VERSION_COLUMN : int
+          {static} + WIDGET_ID_COLUMN : int
+          {static} + WIDGET_TYPE_COLUMN : int
+          {static} - INVALID_ID : int
+          {static} - TAG : String
+          - mAlertDate : long
+          - mBgColorId : int
+          - mContentResolver : ContentResolver
+          - mContext : Context
+          - mCreatedDate : long
+          - mDataList : ArrayList<SqlData>
+          - mDiffNoteValues : ContentValues
+          - mHasAttachment : int
+          - mId : long
+          - mIsCreate : boolean
+          - mModifiedDate : long
+          - mOriginParent : long
+          - mParentId : long
+          - mSnippet : String
+          - mType : int
+          - mVersion : long
+          - mWidgetId : int
+          - mWidgetType : int
+          + SqlNote()
+          + SqlNote()
+          + SqlNote()
+          + commit()
+          + getContent()
+          + getId()
+          + getParentId()
+          + getSnippet()
+          + isNoteType()
+          + resetLocalModified()
+          + setContent()
+          + setGtaskId()
+          + setParentId()
+          + setSyncId()
+          - loadDataContent()
+          - loadFromCursor()
+          - loadFromCursor()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace gtask.data {
+      class net.micode.notes.gtask.data.Task {
+          {static} - TAG : String
+          - mCompleted : boolean
+          - mMetaInfo : JSONObject
+          - mNotes : String
+          + Task()
+          + getCompleted()
+          + getCreateAction()
+          + getLocalJSONFromContent()
+          + getNotes()
+          + getParent()
+          + getPriorSibling()
+          + getSyncAction()
+          + getUpdateAction()
+          + isWorthSaving()
+          + setCompleted()
+          + setContentByLocalJSON()
+          + setContentByRemoteJSON()
+          + setMetaInfo()
+          + setNotes()
+          + setParent()
+          + setPriorSibling()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace gtask.data {
+      class net.micode.notes.gtask.data.TaskList {
+          {static} - TAG : String
+          - mChildren : ArrayList<Task>
+          - mIndex : int
+          + TaskList()
+          + addChildTask()
+          + addChildTask()
+          + findChildTaskByGid()
+          + getChilTaskByGid()
+          + getChildTaskByIndex()
+          + getChildTaskCount()
+          + getChildTaskIndex()
+          + getChildTaskList()
+          + getCreateAction()
+          + getIndex()
+          + getLocalJSONFromContent()
+          + getSyncAction()
+          + getUpdateAction()
+          + moveChildTask()
+          + removeChildTask()
+          + setContentByLocalJSON()
+          + setContentByRemoteJSON()
+          + setIndex()
+      }
+    }
+  }
+  
+
+  net.micode.notes.gtask.data.MetaData -up-|> net.micode.notes.gtask.data.Task
+  net.micode.notes.gtask.data.Task -up-|> net.micode.notes.gtask.data.Node
+  net.micode.notes.gtask.data.Task o-- net.micode.notes.gtask.data.TaskList : mParent
+  net.micode.notes.gtask.data.Task o-- net.micode.notes.gtask.data.Task : mPriorSibling
+  net.micode.notes.gtask.data.TaskList -up-|> net.micode.notes.gtask.data.Node
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

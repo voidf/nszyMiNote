@@ -1,0 +1,218 @@
+@startuml
+
+title __DATA's Class Diagram__\n
+
+  namespace net.micode.notes {
+    namespace data {
+      class net.micode.notes.data.Contact {
+          {static} - CALLER_ID_SELECTION : String
+          {static} - TAG : String
+          {static} - sContactCache : HashMap<String, String>
+          {static} + getContact()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace data {
+      class net.micode.notes.data.Notes {
+          {static} + AUTHORITY : String
+          {static} + CONTENT_DATA_URI : Uri
+          {static} + CONTENT_NOTE_URI : Uri
+          {static} + ID_CALL_RECORD_FOLDER : int
+          {static} + ID_ROOT_FOLDER : int
+          {static} + ID_TEMPARAY_FOLDER : int
+          {static} + ID_TRASH_FOLER : int
+          {static} + INTENT_EXTRA_ALERT_DATE : String
+          {static} + INTENT_EXTRA_BACKGROUND_ID : String
+          {static} + INTENT_EXTRA_CALL_DATE : String
+          {static} + INTENT_EXTRA_FOLDER_ID : String
+          {static} + INTENT_EXTRA_WIDGET_ID : String
+          {static} + INTENT_EXTRA_WIDGET_TYPE : String
+          {static} + TAG : String
+          {static} + TYPE_FOLDER : int
+          {static} + TYPE_NOTE : int
+          {static} + TYPE_SYSTEM : int
+          {static} + TYPE_WIDGET_2X : int
+          {static} + TYPE_WIDGET_4X : int
+          {static} + TYPE_WIDGET_INVALIDE : int
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace data {
+      class net.micode.notes.data.Notes.CallNote {
+          {static} + CALL_DATE : String
+          {static} + CONTENT_ITEM_TYPE : String
+          {static} + CONTENT_TYPE : String
+          {static} + CONTENT_URI : Uri
+          {static} + PHONE_NUMBER : String
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace data {
+      interface net.micode.notes.data.Notes.DataColumns {
+          {static} + CONTENT : String
+          {static} + CREATED_DATE : String
+          {static} + DATA1 : String
+          {static} + DATA2 : String
+          {static} + DATA3 : String
+          {static} + DATA4 : String
+          {static} + DATA5 : String
+          {static} + ID : String
+          {static} + MIME_TYPE : String
+          {static} + MODIFIED_DATE : String
+          {static} + NOTE_ID : String
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace data {
+      class net.micode.notes.data.Notes.DataConstants {
+          {static} + CALL_NOTE : String
+          {static} + NOTE : String
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace data {
+      interface net.micode.notes.data.Notes.NoteColumns {
+          {static} + ALERTED_DATE : String
+          {static} + BG_COLOR_ID : String
+          {static} + CREATED_DATE : String
+          {static} + GTASK_ID : String
+          {static} + HAS_ATTACHMENT : String
+          {static} + ID : String
+          {static} + LOCAL_MODIFIED : String
+          {static} + MODIFIED_DATE : String
+          {static} + NOTES_COUNT : String
+          {static} + ORIGIN_PARENT_ID : String
+          {static} + PARENT_ID : String
+          {static} + SNIPPET : String
+          {static} + SYNC_ID : String
+          {static} + TYPE : String
+          {static} + VERSION : String
+          {static} + WIDGET_ID : String
+          {static} + WIDGET_TYPE : String
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace data {
+      class net.micode.notes.data.Notes.TextNote {
+          {static} + CONTENT_ITEM_TYPE : String
+          {static} + CONTENT_TYPE : String
+          {static} + CONTENT_URI : Uri
+          {static} + MODE : String
+          {static} + MODE_CHECK_LIST : int
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace data {
+      class net.micode.notes.data.NotesDatabaseHelper {
+          {static} - CREATE_DATA_NOTE_ID_INDEX_SQL : String
+          {static} - CREATE_DATA_TABLE_SQL : String
+          {static} - CREATE_NOTE_TABLE_SQL : String
+          {static} - DATA_UPDATE_NOTE_CONTENT_ON_DELETE_TRIGGER : String
+          {static} - DATA_UPDATE_NOTE_CONTENT_ON_INSERT_TRIGGER : String
+          {static} - DATA_UPDATE_NOTE_CONTENT_ON_UPDATE_TRIGGER : String
+          {static} - DB_NAME : String
+          {static} - DB_VERSION : int
+          {static} - FOLDER_DELETE_NOTES_ON_DELETE_TRIGGER : String
+          {static} - FOLDER_MOVE_NOTES_ON_TRASH_TRIGGER : String
+          {static} - NOTE_DECREASE_FOLDER_COUNT_ON_DELETE_TRIGGER : String
+          {static} - NOTE_DECREASE_FOLDER_COUNT_ON_UPDATE_TRIGGER : String
+          {static} - NOTE_DELETE_DATA_ON_DELETE_TRIGGER : String
+          {static} - NOTE_INCREASE_FOLDER_COUNT_ON_INSERT_TRIGGER : String
+          {static} - NOTE_INCREASE_FOLDER_COUNT_ON_UPDATE_TRIGGER : String
+          {static} - TAG : String
+          {static} - mInstance : NotesDatabaseHelper
+          + NotesDatabaseHelper()
+          + createDataTable()
+          + createNoteTable()
+          + onCreate()
+          + onUpgrade()
+          {static} ~ getInstance()
+          - createSystemFolder()
+          - reCreateDataTableTriggers()
+          - reCreateNoteTableTriggers()
+          - upgradeToV2()
+          - upgradeToV3()
+          - upgradeToV4()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace data {
+      interface net.micode.notes.data.NotesDatabaseHelper.TABLE {
+          {static} + DATA : String
+          {static} + NOTE : String
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace data {
+      class net.micode.notes.data.NotesProvider {
+          {static} - NOTES_SEARCH_PROJECTION : String
+          {static} - NOTES_SNIPPET_SEARCH_QUERY : String
+          {static} - TAG : String
+          {static} - URI_DATA : int
+          {static} - URI_DATA_ITEM : int
+          {static} - URI_NOTE : int
+          {static} - URI_NOTE_ITEM : int
+          {static} - URI_SEARCH : int
+          {static} - URI_SEARCH_SUGGEST : int
+          {static} - mMatcher : UriMatcher
+          + delete()
+          + getType()
+          + insert()
+          + onCreate()
+          + query()
+          + update()
+          - increaseNoteVersion()
+          - parseSelection()
+      }
+    }
+  }
+  
+
+  net.micode.notes.data.Notes +-down- net.micode.notes.data.Notes.CallNote
+  net.micode.notes.data.Notes +-down- net.micode.notes.data.Notes.DataColumns
+  net.micode.notes.data.Notes +-down- net.micode.notes.data.Notes.DataConstants
+  net.micode.notes.data.Notes +-down- net.micode.notes.data.Notes.NoteColumns
+  net.micode.notes.data.Notes +-down- net.micode.notes.data.Notes.TextNote
+  net.micode.notes.data.Notes.CallNote .up.|> net.micode.notes.data.Notes.DataColumns
+  net.micode.notes.data.Notes.TextNote .up.|> net.micode.notes.data.Notes.DataColumns
+  net.micode.notes.data.NotesDatabaseHelper -up-|> android.database.sqlite.SQLiteOpenHelper
+  net.micode.notes.data.NotesDatabaseHelper +-down- net.micode.notes.data.NotesDatabaseHelper.TABLE
+  net.micode.notes.data.NotesProvider -up-|> android.content.ContentProvider
+  net.micode.notes.data.NotesProvider o-- net.micode.notes.data.NotesDatabaseHelper : mHelper
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

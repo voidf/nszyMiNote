@@ -25,7 +25,7 @@ import net.micode.notes.data.Notes;
 import net.micode.notes.data.Notes.NoteColumns;
 import net.micode.notes.tool.DataUtils;
 
-
+/* 列表元素数据模型，属于模型层 */
 public class NoteItemData {
     static final String [] PROJECTION = new String [] {
         NoteColumns.ID,
@@ -75,7 +75,7 @@ public class NoteItemData {
     private boolean mIsOnlyOneItem;
     private boolean mIsOneNoteFollowingFolder;
     private boolean mIsMultiNotesFollowingFolder;
-
+    /* 构造函数：从游标处拿一条数据放到实例里 */
     public NoteItemData(Context context, Cursor cursor) {
         mId = cursor.getLong(ID_COLUMN);
         mAlertDate = cursor.getLong(ALERTED_DATE_COLUMN);
@@ -108,7 +108,7 @@ public class NoteItemData {
         }
         checkPostion(cursor);
     }
-
+    /* 判断位置 */
     private void checkPostion(Cursor cursor) {
         mIsLastItem = cursor.isLast() ? true : false;
         mIsFirstItem = cursor.isFirst() ? true : false;
@@ -119,12 +119,13 @@ public class NoteItemData {
         if (mType == Notes.TYPE_NOTE && !mIsFirstItem) {
             int position = cursor.getPosition();
             if (cursor.moveToPrevious()) {
+                // 判断当前元素的上一个元素（如果是文件夹就是当前元素的父元素）
                 if (cursor.getInt(TYPE_COLUMN) == Notes.TYPE_FOLDER
                         || cursor.getInt(TYPE_COLUMN) == Notes.TYPE_SYSTEM) {
                     if (cursor.getCount() > (position + 1)) {
-                        mIsMultiNotesFollowingFolder = true;
+                        mIsMultiNotesFollowingFolder = true; // 文件夹里有多个note
                     } else {
-                        mIsOneNoteFollowingFolder = true;
+                        mIsOneNoteFollowingFolder = true; // 文件夹里只有一个note
                     }
                 }
                 if (!cursor.moveToNext()) {
@@ -133,7 +134,7 @@ public class NoteItemData {
             }
         }
     }
-
+    // 以下是各种数据的只读接口
     public boolean isOneFollowingFolder() {
         return mIsOneNoteFollowingFolder;
     }
@@ -145,7 +146,7 @@ public class NoteItemData {
     public boolean isLast() {
         return mIsLastItem;
     }
-
+    /* 拿联系人名 */
     public String getCallName() {
         return mName;
     }

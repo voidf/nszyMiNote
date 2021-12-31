@@ -1,0 +1,385 @@
+@startuml
+
+title __MICODE.APP's Class Diagram__\n
+
+  namespace net.micode.notes {
+    class net.micode.notes.BuildConfig {
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace data {
+      class net.micode.notes.data.Contact {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace data {
+      class net.micode.notes.data.Notes {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace data {
+      class net.micode.notes.data.NotesDatabaseHelper {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace data {
+      class net.micode.notes.data.NotesProvider {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace gtask.data {
+      class net.micode.notes.gtask.data.MetaData {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace gtask.data {
+      abstract class net.micode.notes.gtask.data.Node {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace gtask.data {
+      class net.micode.notes.gtask.data.SqlData {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace gtask.data {
+      class net.micode.notes.gtask.data.SqlNote {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace gtask.data {
+      class net.micode.notes.gtask.data.Task {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace gtask.data {
+      class net.micode.notes.gtask.data.TaskList {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace gtask.exception {
+      class net.micode.notes.gtask.exception.ActionFailureException {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace gtask.exception {
+      class net.micode.notes.gtask.exception.NetworkFailureException {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace gtask.remote {
+      class net.micode.notes.gtask.remote.GTaskASyncTask {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace gtask.remote {
+      class net.micode.notes.gtask.remote.GTaskClient {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace gtask.remote {
+      class net.micode.notes.gtask.remote.GTaskManager {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace gtask.remote {
+      class net.micode.notes.gtask.remote.GTaskSyncService {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace model {
+      class net.micode.notes.model.Note {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace model {
+      class net.micode.notes.model.WorkingNote {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace tool {
+      class net.micode.notes.tool.BackupUtils {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace tool {
+      class net.micode.notes.tool.DataUtils {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace tool {
+      class net.micode.notes.tool.GTaskStringUtils {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace tool {
+      class net.micode.notes.tool.ResourceParser {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.AlarmAlertActivity {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.AlarmInitReceiver {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.AlarmReceiver {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.DateTimePicker {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.DateTimePickerDialog {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.DropdownMenu {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.FoldersListAdapter {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.NoteEditActivity {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.NoteEditText {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.NoteItemData {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.NotesListActivity {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.NotesListAdapter {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.NotesListItem {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.NotesPreferenceActivity {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace widget {
+      abstract class net.micode.notes.widget.NoteWidgetProvider {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace widget {
+      class net.micode.notes.widget.NoteWidgetProvider_2x {
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace widget {
+      class net.micode.notes.widget.NoteWidgetProvider_4x {
+      }
+    }
+  }
+  
+
+  net.micode.notes.data.NotesDatabaseHelper -up-|> android.database.sqlite.SQLiteOpenHelper
+  net.micode.notes.data.NotesProvider -up-|> android.content.ContentProvider
+  net.micode.notes.data.NotesProvider o-- net.micode.notes.data.NotesDatabaseHelper : mHelper
+  net.micode.notes.gtask.data.MetaData -up-|> net.micode.notes.gtask.data.Task
+  net.micode.notes.gtask.data.Task -up-|> net.micode.notes.gtask.data.Node
+  net.micode.notes.gtask.data.Task o-- net.micode.notes.gtask.data.TaskList : mParent
+  net.micode.notes.gtask.data.Task o-- net.micode.notes.gtask.data.Task : mPriorSibling
+  net.micode.notes.gtask.data.TaskList -up-|> net.micode.notes.gtask.data.Node
+  net.micode.notes.gtask.remote.GTaskASyncTask -up-|> android.os.AsyncTask
+  net.micode.notes.gtask.remote.GTaskASyncTask o-- net.micode.notes.gtask.remote.GTaskASyncTask.OnCompleteListener : mOnCompleteListener
+  net.micode.notes.gtask.remote.GTaskASyncTask o-- net.micode.notes.gtask.remote.GTaskManager : mTaskManager
+  net.micode.notes.gtask.remote.GTaskManager o-- net.micode.notes.gtask.data.TaskList : mMetaList
+  net.micode.notes.gtask.remote.GTaskSyncService -up-|> android.app.Service
+  net.micode.notes.model.Note o-- net.micode.notes.model.Note.NoteData : mNoteData
+  net.micode.notes.model.WorkingNote o-- net.micode.notes.model.Note : mNote
+  net.micode.notes.model.WorkingNote o-- net.micode.notes.model.WorkingNote.NoteSettingChangedListener : mNoteSettingStatusListener
+  net.micode.notes.tool.BackupUtils o-- net.micode.notes.tool.BackupUtils.TextExport : mTextExport
+  net.micode.notes.ui.AlarmAlertActivity .up.|> android.content.DialogInterface.OnClickListener
+  net.micode.notes.ui.AlarmAlertActivity .up.|> android.content.DialogInterface.OnDismissListener
+  net.micode.notes.ui.AlarmAlertActivity -up-|> android.app.Activity
+  net.micode.notes.ui.AlarmInitReceiver -up-|> android.content.BroadcastReceiver
+  net.micode.notes.ui.AlarmReceiver -up-|> android.content.BroadcastReceiver
+  net.micode.notes.ui.DateTimePicker -up-|> android.widget.FrameLayout
+  net.micode.notes.ui.DateTimePicker o-- net.micode.notes.ui.DateTimePicker.OnDateTimeChangedListener : mOnDateTimeChangedListener
+  net.micode.notes.ui.DateTimePickerDialog .up.|> android.content.DialogInterface.OnClickListener
+  net.micode.notes.ui.DateTimePickerDialog -up-|> android.app.AlertDialog
+  net.micode.notes.ui.DateTimePickerDialog o-- net.micode.notes.ui.DateTimePicker : mDateTimePicker
+  net.micode.notes.ui.DateTimePickerDialog o-- net.micode.notes.ui.DateTimePickerDialog.OnDateTimeSetListener : mOnDateTimeSetListener
+  net.micode.notes.ui.FoldersListAdapter -up-|> android.widget.CursorAdapter
+  net.micode.notes.ui.NoteEditActivity .up.|> android.view.View.OnClickListener
+  net.micode.notes.ui.NoteEditActivity .up.|> net.micode.notes.model.WorkingNote.NoteSettingChangedListener
+  net.micode.notes.ui.NoteEditActivity .up.|> net.micode.notes.ui.NoteEditText.OnTextViewChangeListener
+  net.micode.notes.ui.NoteEditActivity -up-|> android.app.Activity
+  net.micode.notes.ui.NoteEditActivity o-- net.micode.notes.ui.NoteEditActivity.HeadViewHolder : mNoteHeaderHolder
+  net.micode.notes.ui.NoteEditActivity o-- net.micode.notes.model.WorkingNote : mWorkingNote
+  net.micode.notes.ui.NoteEditText -up-|> android.widget.EditText
+  net.micode.notes.ui.NoteEditText o-- net.micode.notes.ui.NoteEditText.OnTextViewChangeListener : mOnTextViewChangeListener
+  net.micode.notes.ui.NotesListActivity .up.|> android.view.View.OnClickListener
+  net.micode.notes.ui.NotesListActivity .up.|> android.widget.AdapterView.OnItemLongClickListener
+  net.micode.notes.ui.NotesListActivity -up-|> android.app.Activity
+  net.micode.notes.ui.NotesListActivity o-- net.micode.notes.ui.NotesListActivity.BackgroundQueryHandler : mBackgroundQueryHandler
+  net.micode.notes.ui.NotesListActivity o-- net.micode.notes.ui.NoteItemData : mFocusNoteDataItem
+  net.micode.notes.ui.NotesListActivity o-- net.micode.notes.ui.NotesListActivity.ModeCallback : mModeCallBack
+  net.micode.notes.ui.NotesListActivity o-- net.micode.notes.ui.NotesListAdapter : mNotesListAdapter
+  net.micode.notes.ui.NotesListActivity o-- net.micode.notes.ui.NotesListActivity.ListEditState : mState
+  net.micode.notes.ui.NotesListAdapter -up-|> android.widget.CursorAdapter
+  net.micode.notes.ui.NotesListItem -up-|> android.widget.LinearLayout
+  net.micode.notes.ui.NotesListItem o-- net.micode.notes.ui.NoteItemData : mItemData
+  net.micode.notes.ui.NotesPreferenceActivity -up-|> android.preference.PreferenceActivity
+  net.micode.notes.ui.NotesPreferenceActivity o-- net.micode.notes.ui.NotesPreferenceActivity.GTaskReceiver : mReceiver
+  net.micode.notes.widget.NoteWidgetProvider -up-|> android.appwidget.AppWidgetProvider
+  net.micode.notes.widget.NoteWidgetProvider_2x -up-|> net.micode.notes.widget.NoteWidgetProvider
+  net.micode.notes.widget.NoteWidgetProvider_4x -up-|> net.micode.notes.widget.NoteWidgetProvider
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

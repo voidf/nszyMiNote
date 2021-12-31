@@ -1,0 +1,220 @@
+@startuml
+
+title __TOOL's Class Diagram__\n
+
+  namespace net.micode.notes {
+    namespace tool {
+      class net.micode.notes.tool.BackupUtils {
+          {static} + STATE_BACKUP_FILE_NOT_EXIST : int
+          {static} + STATE_DATA_DESTROIED : int
+          {static} + STATE_SD_CARD_UNMOUONTED : int
+          {static} + STATE_SUCCESS : int
+          {static} + STATE_SYSTEM_ERROR : int
+          {static} - TAG : String
+          {static} - sInstance : BackupUtils
+          + exportToText()
+          + getExportedTextFileDir()
+          + getExportedTextFileName()
+          {static} + getInstance()
+          - BackupUtils()
+          {static} - externalStorageAvailable()
+          {static} - generateFileMountedOnSDcard()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace tool {
+      class net.micode.notes.tool.BackupUtils.TextExport {
+          {static} - DATA_COLUMN_CALL_DATE : int
+          {static} - DATA_COLUMN_CONTENT : int
+          {static} - DATA_COLUMN_MIME_TYPE : int
+          {static} - DATA_COLUMN_PHONE_NUMBER : int
+          {static} - DATA_PROJECTION : String[]
+          {static} - FORMAT_FOLDER_NAME : int
+          {static} - FORMAT_NOTE_CONTENT : int
+          {static} - FORMAT_NOTE_DATE : int
+          {static} - NOTE_COLUMN_ID : int
+          {static} - NOTE_COLUMN_MODIFIED_DATE : int
+          {static} - NOTE_COLUMN_SNIPPET : int
+          {static} - NOTE_PROJECTION : String[]
+          - TEXT_FORMAT : String[]
+          - mContext : Context
+          - mFileDirectory : String
+          - mFileName : String
+          + TextExport()
+          + exportToText()
+          - exportFolderToText()
+          - exportNoteToText()
+          - getExportToTextPrintStream()
+          - getFormat()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace tool {
+      class net.micode.notes.tool.DataUtils {
+          {static} + TAG : String
+          {static} + batchDeleteNotes()
+          {static} + batchMoveToFolder()
+          {static} + checkVisibleFolderName()
+          {static} + existInDataDatabase()
+          {static} + existInNoteDatabase()
+          {static} + getCallNumberByNoteId()
+          {static} + getFolderNoteWidget()
+          {static} + getFormattedSnippet()
+          {static} + getNoteIdByPhoneNumberAndCallDate()
+          {static} + getSnippetById()
+          {static} + getUserFolderCount()
+          {static} + moveNoteToFoler()
+          {static} + visibleInNoteDatabase()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace tool {
+      class net.micode.notes.tool.GTaskStringUtils {
+          {static} + FOLDER_CALL_NOTE : String
+          {static} + FOLDER_DEFAULT : String
+          {static} + FOLDER_META : String
+          {static} + GTASK_JSON_ACTION_ID : String
+          {static} + GTASK_JSON_ACTION_LIST : String
+          {static} + GTASK_JSON_ACTION_TYPE : String
+          {static} + GTASK_JSON_ACTION_TYPE_CREATE : String
+          {static} + GTASK_JSON_ACTION_TYPE_GETALL : String
+          {static} + GTASK_JSON_ACTION_TYPE_MOVE : String
+          {static} + GTASK_JSON_ACTION_TYPE_UPDATE : String
+          {static} + GTASK_JSON_CHILD_ENTITY : String
+          {static} + GTASK_JSON_CLIENT_VERSION : String
+          {static} + GTASK_JSON_COMPLETED : String
+          {static} + GTASK_JSON_CREATOR_ID : String
+          {static} + GTASK_JSON_CURRENT_LIST_ID : String
+          {static} + GTASK_JSON_DEFAULT_LIST_ID : String
+          {static} + GTASK_JSON_DELETED : String
+          {static} + GTASK_JSON_DEST_LIST : String
+          {static} + GTASK_JSON_DEST_PARENT : String
+          {static} + GTASK_JSON_DEST_PARENT_TYPE : String
+          {static} + GTASK_JSON_ENTITY_DELTA : String
+          {static} + GTASK_JSON_ENTITY_TYPE : String
+          {static} + GTASK_JSON_GET_DELETED : String
+          {static} + GTASK_JSON_ID : String
+          {static} + GTASK_JSON_INDEX : String
+          {static} + GTASK_JSON_LAST_MODIFIED : String
+          {static} + GTASK_JSON_LATEST_SYNC_POINT : String
+          {static} + GTASK_JSON_LISTS : String
+          {static} + GTASK_JSON_LIST_ID : String
+          {static} + GTASK_JSON_NAME : String
+          {static} + GTASK_JSON_NEW_ID : String
+          {static} + GTASK_JSON_NOTES : String
+          {static} + GTASK_JSON_PARENT_ID : String
+          {static} + GTASK_JSON_PRIOR_SIBLING_ID : String
+          {static} + GTASK_JSON_RESULTS : String
+          {static} + GTASK_JSON_SOURCE_LIST : String
+          {static} + GTASK_JSON_TASKS : String
+          {static} + GTASK_JSON_TYPE : String
+          {static} + GTASK_JSON_TYPE_GROUP : String
+          {static} + GTASK_JSON_TYPE_TASK : String
+          {static} + GTASK_JSON_USER : String
+          {static} + META_HEAD_DATA : String
+          {static} + META_HEAD_GTASK_ID : String
+          {static} + META_HEAD_NOTE : String
+          {static} + META_NOTE_NAME : String
+          {static} + MIUI_FOLDER_PREFFIX : String
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace tool {
+      class net.micode.notes.tool.ResourceParser {
+          {static} + BG_DEFAULT_COLOR : int
+          {static} + BG_DEFAULT_FONT_SIZE : int
+          {static} + BLUE : int
+          {static} + GREEN : int
+          {static} + RED : int
+          {static} + TEXT_LARGE : int
+          {static} + TEXT_MEDIUM : int
+          {static} + TEXT_SMALL : int
+          {static} + TEXT_SUPER : int
+          {static} + WHITE : int
+          {static} + YELLOW : int
+          {static} + getDefaultBgId()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace tool {
+      class net.micode.notes.tool.ResourceParser.NoteBgResources {
+          {static} - BG_EDIT_RESOURCES : int[]
+          {static} - BG_EDIT_TITLE_RESOURCES : int[]
+          {static} + getNoteBgResource()
+          {static} + getNoteTitleBgResource()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace tool {
+      class net.micode.notes.tool.ResourceParser.NoteItemBgResources {
+          {static} - BG_FIRST_RESOURCES : int[]
+          {static} - BG_LAST_RESOURCES : int[]
+          {static} - BG_NORMAL_RESOURCES : int[]
+          {static} - BG_SINGLE_RESOURCES : int[]
+          {static} + getFolderBgRes()
+          {static} + getNoteBgFirstRes()
+          {static} + getNoteBgLastRes()
+          {static} + getNoteBgNormalRes()
+          {static} + getNoteBgSingleRes()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace tool {
+      class net.micode.notes.tool.ResourceParser.TextAppearanceResources {
+          {static} - TEXTAPPEARANCE_RESOURCES : int[]
+          {static} + getResourcesSize()
+          {static} + getTexAppearanceResource()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace tool {
+      class net.micode.notes.tool.ResourceParser.WidgetBgResources {
+          {static} - BG_2X_RESOURCES : int[]
+          {static} - BG_4X_RESOURCES : int[]
+          {static} + getWidget2xBgResource()
+          {static} + getWidget4xBgResource()
+      }
+    }
+  }
+  
+
+  net.micode.notes.tool.BackupUtils o-- net.micode.notes.tool.BackupUtils.TextExport : mTextExport
+  net.micode.notes.tool.BackupUtils +-down- net.micode.notes.tool.BackupUtils.TextExport
+  net.micode.notes.tool.ResourceParser +-down- net.micode.notes.tool.ResourceParser.NoteBgResources
+  net.micode.notes.tool.ResourceParser +-down- net.micode.notes.tool.ResourceParser.NoteItemBgResources
+  net.micode.notes.tool.ResourceParser +-down- net.micode.notes.tool.ResourceParser.TextAppearanceResources
+  net.micode.notes.tool.ResourceParser +-down- net.micode.notes.tool.ResourceParser.WidgetBgResources
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

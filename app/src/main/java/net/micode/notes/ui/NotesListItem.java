@@ -29,7 +29,7 @@ import net.micode.notes.data.Notes;
 import net.micode.notes.tool.DataUtils;
 import net.micode.notes.tool.ResourceParser.NoteItemBgResources;
 
-
+/* 便签列表的单元素，视图类 */
 public class NotesListItem extends LinearLayout {
     private ImageView mAlert;
     private TextView mTitle;
@@ -47,7 +47,7 @@ public class NotesListItem extends LinearLayout {
         mCallName = (TextView) findViewById(R.id.tv_name);
         mCheckBox = (CheckBox) findViewById(android.R.id.checkbox);
     }
-
+    /* 将数据类NoteItemData绑定到本View上用于显示 */
     public void bind(Context context, NoteItemData data, boolean choiceMode, boolean checked) {
         if (choiceMode && data.getType() == Notes.TYPE_NOTE) {
             mCheckBox.setVisibility(View.VISIBLE);

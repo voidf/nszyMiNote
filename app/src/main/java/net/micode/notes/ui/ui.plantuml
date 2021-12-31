@@ -1,0 +1,631 @@
+@startuml
+
+title __UI's Class Diagram__\n
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.AlarmAlertActivity {
+          ~ mPlayer : MediaPlayer
+          {static} - SNIPPET_PREW_MAX_LEN : int
+          - mNoteId : long
+          - mSnippet : String
+          + onClick()
+          + onDismiss()
+          # onCreate()
+          - isScreenOn()
+          - playAlarmSound()
+          - showActionDialog()
+          - stopAlarmSound()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.AlarmInitReceiver {
+          {static} - COLUMN_ALERTED_DATE : int
+          {static} - COLUMN_ID : int
+          {static} - PROJECTION : String[]
+          + onReceive()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.AlarmReceiver {
+          + onReceive()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.DateTimePicker {
+          {static} - AMPM_SPINNER_MAX_VAL : int
+          {static} - AMPM_SPINNER_MIN_VAL : int
+          {static} - DATE_SPINNER_MAX_VAL : int
+          {static} - DATE_SPINNER_MIN_VAL : int
+          {static} - DAYS_IN_ALL_WEEK : int
+          {static} - DEFAULT_ENABLE_STATE : boolean
+          {static} - HOURS_IN_ALL_DAY : int
+          {static} - HOURS_IN_HALF_DAY : int
+          {static} - HOUR_SPINNER_MAX_VAL_12_HOUR_VIEW : int
+          {static} - HOUR_SPINNER_MAX_VAL_24_HOUR_VIEW : int
+          {static} - HOUR_SPINNER_MIN_VAL_12_HOUR_VIEW : int
+          {static} - HOUR_SPINNER_MIN_VAL_24_HOUR_VIEW : int
+          {static} - MINUT_SPINNER_MAX_VAL : int
+          {static} - MINUT_SPINNER_MIN_VAL : int
+          - mAmPmSpinner : NumberPicker
+          - mDate : Calendar
+          - mDateDisplayValues : String[]
+          - mDateSpinner : NumberPicker
+          - mHourSpinner : NumberPicker
+          - mInitialising : boolean
+          - mIs24HourView : boolean
+          - mIsAm : boolean
+          - mIsEnabled : boolean
+          - mMinuteSpinner : NumberPicker
+          - mOnAmPmChangedListener : OnValueChangeListener
+          - mOnDateChangedListener : OnValueChangeListener
+          - mOnHourChangedListener : OnValueChangeListener
+          - mOnMinuteChangedListener : OnValueChangeListener
+          + DateTimePicker()
+          + DateTimePicker()
+          + DateTimePicker()
+          + getCurrentDateInTimeMillis()
+          + getCurrentDay()
+          + getCurrentHourOfDay()
+          + getCurrentMinute()
+          + getCurrentMonth()
+          + getCurrentYear()
+          + is24HourView()
+          + isEnabled()
+          + set24HourView()
+          + setCurrentDate()
+          + setCurrentDate()
+          + setCurrentDay()
+          + setCurrentHour()
+          + setCurrentMinute()
+          + setCurrentMonth()
+          + setCurrentYear()
+          + setEnabled()
+          + setOnDateTimeChangedListener()
+          - getCurrentHour()
+          - onDateTimeChanged()
+          - updateAmPmControl()
+          - updateDateControl()
+          - updateHourControl()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      interface net.micode.notes.ui.DateTimePicker.OnDateTimeChangedListener {
+          {abstract} + onDateTimeChanged()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.DateTimePickerDialog {
+          - mDate : Calendar
+          - mIs24HourView : boolean
+          + DateTimePickerDialog()
+          + onClick()
+          + set24HourView()
+          + setOnDateTimeSetListener()
+          - updateTitle()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      interface net.micode.notes.ui.DateTimePickerDialog.OnDateTimeSetListener {
+          {abstract} + OnDateTimeSet()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.DropdownMenu {
+          - mButton : Button
+          - mMenu : Menu
+          - mPopupMenu : PopupMenu
+          + DropdownMenu()
+          + findItem()
+          + setOnDropdownMenuItemClickListener()
+          + setTitle()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.FoldersListAdapter {
+          {static} + ID_COLUMN : int
+          {static} + NAME_COLUMN : int
+          {static} + PROJECTION : String[]
+          + FoldersListAdapter()
+          + bindView()
+          + getFolderName()
+          + newView()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.FoldersListAdapter.FolderListItem {
+          - mName : TextView
+          + FolderListItem()
+          + bind()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.NoteEditActivity {
+          {static} + TAG_CHECKED : String
+          {static} + TAG_UNCHECKED : String
+          {static} - PREFERENCE_FONT_SIZE : String
+          {static} - SHORTCUT_ICON_TITLE_MAX_LEN : int
+          {static} - TAG : String
+          - mEditTextList : LinearLayout
+          - mFontSizeId : int
+          - mFontSizeSelector : View
+          - mHeadViewPanel : View
+          - mNoteBgColorSelector : View
+          - mNoteEditor : EditText
+          - mNoteEditorPanel : View
+          - mPattern : Pattern
+          - mSharedPrefs : SharedPreferences
+          - mUserQuery : String
+          {static} - sBgSelectorBtnsMap : Map<Integer, Integer>
+          {static} - sBgSelectorSelectionMap : Map<Integer, Integer>
+          {static} - sFontSelectorSelectionMap : Map<Integer, Integer>
+          {static} - sFontSizeBtnsMap : Map<Integer, Integer>
+          + dispatchTouchEvent()
+          + onBackPressed()
+          + onBackgroundColorChanged()
+          + onCheckListModeChanged()
+          + onClick()
+          + onClockAlertChanged()
+          + onEditTextDelete()
+          + onEditTextEnter()
+          + onOptionsItemSelected()
+          + onPrepareOptionsMenu()
+          + onTextChange()
+          + onWidgetChanged()
+          # onCreate()
+          # onNewIntent()
+          # onPause()
+          # onRestoreInstanceState()
+          # onResume()
+          # onSaveInstanceState()
+          - clearSettingState()
+          - createNewNote()
+          - deleteCurrentNote()
+          - getHighlightQueryResult()
+          - getListItem()
+          - getWorkingText()
+          - inRangeOfView()
+          - initActivityState()
+          - initNoteScreen()
+          - initResources()
+          - isSyncMode()
+          - makeShortcutIconTitle()
+          - saveNote()
+          - sendTo()
+          - sendToDesktop()
+          - setReminder()
+          - showAlertHeader()
+          - showToast()
+          - showToast()
+          - switchToListMode()
+          - updateWidget()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.NoteEditActivity.HeadViewHolder {
+          + ibSetBgColor : ImageView
+          + ivAlertIcon : ImageView
+          + tvAlertDate : TextView
+          + tvModified : TextView
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.NoteEditText {
+          {static} - SCHEME_EMAIL : String
+          {static} - SCHEME_HTTP : String
+          {static} - SCHEME_TEL : String
+          {static} - TAG : String
+          - mIndex : int
+          - mSelectionStartBeforeDelete : int
+          {static} - sSchemaActionResMap : Map<String, Integer>
+          + NoteEditText()
+          + NoteEditText()
+          + NoteEditText()
+          + onKeyDown()
+          + onKeyUp()
+          + onTouchEvent()
+          + setIndex()
+          + setOnTextViewChangeListener()
+          # onCreateContextMenu()
+          # onFocusChanged()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      interface net.micode.notes.ui.NoteEditText.OnTextViewChangeListener {
+          {abstract} + onEditTextDelete()
+          {abstract} + onEditTextEnter()
+          {abstract} + onTextChange()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.NoteItemData {
+          {static} ~ PROJECTION : String[]
+          {static} - ALERTED_DATE_COLUMN : int
+          {static} - BG_COLOR_ID_COLUMN : int
+          {static} - CREATED_DATE_COLUMN : int
+          {static} - HAS_ATTACHMENT_COLUMN : int
+          {static} - ID_COLUMN : int
+          {static} - MODIFIED_DATE_COLUMN : int
+          {static} - NOTES_COUNT_COLUMN : int
+          {static} - PARENT_ID_COLUMN : int
+          {static} - SNIPPET_COLUMN : int
+          {static} - TYPE_COLUMN : int
+          {static} - WIDGET_ID_COLUMN : int
+          {static} - WIDGET_TYPE_COLUMN : int
+          - mAlertDate : long
+          - mBgColorId : int
+          - mCreatedDate : long
+          - mHasAttachment : boolean
+          - mId : long
+          - mIsFirstItem : boolean
+          - mIsLastItem : boolean
+          - mIsMultiNotesFollowingFolder : boolean
+          - mIsOneNoteFollowingFolder : boolean
+          - mIsOnlyOneItem : boolean
+          - mModifiedDate : long
+          - mName : String
+          - mNotesCount : int
+          - mParentId : long
+          - mPhoneNumber : String
+          - mSnippet : String
+          - mType : int
+          - mWidgetId : int
+          - mWidgetType : int
+          + NoteItemData()
+          + getAlertDate()
+          + getBgColorId()
+          + getCallName()
+          + getCreatedDate()
+          + getFolderId()
+          + getId()
+          + getModifiedDate()
+          {static} + getNoteType()
+          + getNotesCount()
+          + getParentId()
+          + getSnippet()
+          + getType()
+          + getWidgetId()
+          + getWidgetType()
+          + hasAlert()
+          + hasAttachment()
+          + isCallRecord()
+          + isFirst()
+          + isLast()
+          + isMultiFollowingFolder()
+          + isOneFollowingFolder()
+          + isSingle()
+          - checkPostion()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.NotesListActivity {
+          {static} + NOTES_LISTVIEW_SCROLL_RATE : int
+          {static} - FOLDER_LIST_QUERY_TOKEN : int
+          {static} - FOLDER_NOTE_LIST_QUERY_TOKEN : int
+          {static} - MENU_FOLDER_CHANGE_NAME : int
+          {static} - MENU_FOLDER_DELETE : int
+          {static} - MENU_FOLDER_VIEW : int
+          {static} - NORMAL_SELECTION : String
+          {static} - PREFERENCE_ADD_INTRODUCTION : String
+          {static} - REQUEST_CODE_NEW_NODE : int
+          {static} - REQUEST_CODE_OPEN_NODE : int
+          {static} - ROOT_FOLDER_SELECTION : String
+          {static} - TAG : String
+          - mAddNewNote : Button
+          - mContentResolver : ContentResolver
+          - mCurrentFolderId : long
+          - mDispatch : boolean
+          - mDispatchY : int
+          - mFolderOnCreateContextMenuListener : OnCreateContextMenuListener
+          - mNotesListView : ListView
+          - mOriginY : int
+          - mTitleBar : TextView
+          + onBackPressed()
+          + onClick()
+          + onContextItemSelected()
+          + onContextMenuClosed()
+          + onItemLongClick()
+          + onOptionsItemSelected()
+          + onPrepareOptionsMenu()
+          + onSearchRequested()
+          # onActivityResult()
+          # onCreate()
+          # onStart()
+          - batchDelete()
+          - createNewNote()
+          - deleteFolder()
+          - exportNoteToText()
+          - hideSoftInput()
+          - initResources()
+          - isSyncMode()
+          - openFolder()
+          - openNode()
+          - setAppInfoFromRawRes()
+          - showCreateOrModifyFolderDialog()
+          - showFolderListMenu()
+          - showSoftInput()
+          - startAsyncNotesListQuery()
+          - startPreferenceActivity()
+          - startQueryDestinationFolders()
+          - updateWidget()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.NotesListActivity.BackgroundQueryHandler {
+          + BackgroundQueryHandler()
+          # onQueryComplete()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      enum ListEditState {
+        CALL_RECORD_FOLDER
+        NOTE_LIST
+        SUB_FOLDER
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.NotesListActivity.ModeCallback {
+          - mActionMode : ActionMode
+          - mMoveMenu : MenuItem
+          + finishActionMode()
+          + onActionItemClicked()
+          + onCreateActionMode()
+          + onDestroyActionMode()
+          + onItemCheckedStateChanged()
+          + onMenuItemClick()
+          + onPrepareActionMode()
+          - updateMenu()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.NotesListActivity.NewNoteOnTouchListener {
+          + onTouch()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.NotesListActivity.OnListItemClickListener {
+          + onItemClick()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.NotesListAdapter {
+          {static} - TAG : String
+          - mChoiceMode : boolean
+          - mContext : Context
+          - mNotesCount : int
+          - mSelectedIndex : HashMap<Integer, Boolean>
+          + NotesListAdapter()
+          + bindView()
+          + changeCursor()
+          + getSelectedCount()
+          + getSelectedItemIds()
+          + getSelectedWidget()
+          + isAllSelected()
+          + isInChoiceMode()
+          + isSelectedItem()
+          + newView()
+          + selectAll()
+          + setCheckedItem()
+          + setChoiceMode()
+          # onContentChanged()
+          - calcNotesCount()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.NotesListAdapter.AppWidgetAttribute {
+          + widgetId : int
+          + widgetType : int
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.NotesListItem {
+          - mAlert : ImageView
+          - mCallName : TextView
+          - mCheckBox : CheckBox
+          - mTime : TextView
+          - mTitle : TextView
+          + NotesListItem()
+          + bind()
+          + getItemData()
+          - setBackground()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.NotesPreferenceActivity {
+          {static} + PREFERENCE_LAST_SYNC_TIME : String
+          {static} + PREFERENCE_NAME : String
+          {static} + PREFERENCE_SET_BG_COLOR_KEY : String
+          {static} + PREFERENCE_SYNC_ACCOUNT_NAME : String
+          {static} - AUTHORITIES_FILTER_KEY : String
+          {static} - PREFERENCE_SYNC_ACCOUNT_KEY : String
+          - mAccountCategory : PreferenceCategory
+          - mHasAddedAccount : boolean
+          - mOriAccounts : Account[]
+          {static} + getLastSyncTime()
+          {static} + getSyncAccountName()
+          + onOptionsItemSelected()
+          {static} + setLastSyncTime()
+          # onCreate()
+          # onDestroy()
+          # onResume()
+          - getGoogleAccounts()
+          - loadAccountPreference()
+          - loadSyncButton()
+          - refreshUI()
+          - removeSyncAccount()
+          - setSyncAccount()
+          - showChangeAccountConfirmAlertDialog()
+          - showSelectAccountAlertDialog()
+      }
+    }
+  }
+  
+
+  namespace net.micode.notes {
+    namespace ui {
+      class net.micode.notes.ui.NotesPreferenceActivity.GTaskReceiver {
+          + onReceive()
+      }
+    }
+  }
+  
+
+  net.micode.notes.ui.AlarmAlertActivity .up.|> android.content.DialogInterface.OnClickListener
+  net.micode.notes.ui.AlarmAlertActivity .up.|> android.content.DialogInterface.OnDismissListener
+  net.micode.notes.ui.AlarmAlertActivity -up-|> android.app.Activity
+  net.micode.notes.ui.AlarmInitReceiver -up-|> android.content.BroadcastReceiver
+  net.micode.notes.ui.AlarmReceiver -up-|> android.content.BroadcastReceiver
+  net.micode.notes.ui.DateTimePicker -up-|> android.widget.FrameLayout
+  net.micode.notes.ui.DateTimePicker o-- net.micode.notes.ui.DateTimePicker.OnDateTimeChangedListener : mOnDateTimeChangedListener
+  net.micode.notes.ui.DateTimePicker +-down- net.micode.notes.ui.DateTimePicker.OnDateTimeChangedListener
+  net.micode.notes.ui.DateTimePickerDialog .up.|> android.content.DialogInterface.OnClickListener
+  net.micode.notes.ui.DateTimePickerDialog -up-|> android.app.AlertDialog
+  net.micode.notes.ui.DateTimePickerDialog o-- net.micode.notes.ui.DateTimePicker : mDateTimePicker
+  net.micode.notes.ui.DateTimePickerDialog o-- net.micode.notes.ui.DateTimePickerDialog.OnDateTimeSetListener : mOnDateTimeSetListener
+  net.micode.notes.ui.DateTimePickerDialog +-down- net.micode.notes.ui.DateTimePickerDialog.OnDateTimeSetListener
+  net.micode.notes.ui.FoldersListAdapter -up-|> android.widget.CursorAdapter
+  net.micode.notes.ui.FoldersListAdapter +-down- net.micode.notes.ui.FoldersListAdapter.FolderListItem
+  net.micode.notes.ui.FoldersListAdapter.FolderListItem -up-|> android.widget.LinearLayout
+  net.micode.notes.ui.NoteEditActivity .up.|> android.view.View.OnClickListener
+  net.micode.notes.ui.NoteEditActivity .up.|> net.micode.notes.model.WorkingNote.NoteSettingChangedListener
+  net.micode.notes.ui.NoteEditActivity .up.|> net.micode.notes.ui.NoteEditText.OnTextViewChangeListener
+  net.micode.notes.ui.NoteEditActivity -up-|> android.app.Activity
+  net.micode.notes.ui.NoteEditActivity o-- net.micode.notes.ui.NoteEditActivity.HeadViewHolder : mNoteHeaderHolder
+  net.micode.notes.ui.NoteEditActivity o-- net.micode.notes.model.WorkingNote : mWorkingNote
+  net.micode.notes.ui.NoteEditActivity +-down- net.micode.notes.ui.NoteEditActivity.HeadViewHolder
+  net.micode.notes.ui.NoteEditText -up-|> android.widget.EditText
+  net.micode.notes.ui.NoteEditText o-- net.micode.notes.ui.NoteEditText.OnTextViewChangeListener : mOnTextViewChangeListener
+  net.micode.notes.ui.NoteEditText +-down- net.micode.notes.ui.NoteEditText.OnTextViewChangeListener
+  net.micode.notes.ui.NotesListActivity .up.|> android.view.View.OnClickListener
+  net.micode.notes.ui.NotesListActivity .up.|> android.widget.AdapterView.OnItemLongClickListener
+  net.micode.notes.ui.NotesListActivity -up-|> android.app.Activity
+  net.micode.notes.ui.NotesListActivity o-- net.micode.notes.ui.NotesListActivity.BackgroundQueryHandler : mBackgroundQueryHandler
+  net.micode.notes.ui.NotesListActivity o-- net.micode.notes.ui.NoteItemData : mFocusNoteDataItem
+  net.micode.notes.ui.NotesListActivity o-- net.micode.notes.ui.NotesListActivity.ModeCallback : mModeCallBack
+  net.micode.notes.ui.NotesListActivity o-- net.micode.notes.ui.NotesListAdapter : mNotesListAdapter
+  net.micode.notes.ui.NotesListActivity o-- net.micode.notes.ui.NotesListActivity.ListEditState : mState
+  net.micode.notes.ui.NotesListActivity +-down- net.micode.notes.ui.NotesListActivity.BackgroundQueryHandler
+  net.micode.notes.ui.NotesListActivity +-down- net.micode.notes.ui.NotesListActivity.ListEditState
+  net.micode.notes.ui.NotesListActivity +-down- net.micode.notes.ui.NotesListActivity.ModeCallback
+  net.micode.notes.ui.NotesListActivity +-down- net.micode.notes.ui.NotesListActivity.NewNoteOnTouchListener
+  net.micode.notes.ui.NotesListActivity +-down- net.micode.notes.ui.NotesListActivity.OnListItemClickListener
+  net.micode.notes.ui.NotesListActivity.BackgroundQueryHandler -up-|> android.content.AsyncQueryHandler
+  net.micode.notes.ui.NotesListActivity.ModeCallback .up.|> android.view.MenuItem.OnMenuItemClickListener
+  net.micode.notes.ui.NotesListActivity.ModeCallback .up.|> android.widget.AbsListView.MultiChoiceModeListener
+  net.micode.notes.ui.NotesListActivity.ModeCallback o-- net.micode.notes.ui.DropdownMenu : mDropDownMenu
+  net.micode.notes.ui.NotesListActivity.NewNoteOnTouchListener .up.|> android.view.View.OnTouchListener
+  net.micode.notes.ui.NotesListActivity.OnListItemClickListener .up.|> android.widget.AdapterView.OnItemClickListener
+  net.micode.notes.ui.NotesListAdapter -up-|> android.widget.CursorAdapter
+  net.micode.notes.ui.NotesListAdapter +-down- net.micode.notes.ui.NotesListAdapter.AppWidgetAttribute
+  net.micode.notes.ui.NotesListItem -up-|> android.widget.LinearLayout
+  net.micode.notes.ui.NotesListItem o-- net.micode.notes.ui.NoteItemData : mItemData
+  net.micode.notes.ui.NotesPreferenceActivity -up-|> android.preference.PreferenceActivity
+  net.micode.notes.ui.NotesPreferenceActivity o-- net.micode.notes.ui.NotesPreferenceActivity.GTaskReceiver : mReceiver
+  net.micode.notes.ui.NotesPreferenceActivity +-down- net.micode.notes.ui.NotesPreferenceActivity.GTaskReceiver
+  net.micode.notes.ui.NotesPreferenceActivity.GTaskReceiver -up-|> android.content.BroadcastReceiver
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml
