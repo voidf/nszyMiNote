@@ -17,6 +17,7 @@
 package net.micode.notes.data;
 
 import android.net.Uri;
+/** 便签配置常量命名空间类，定义了类别代号，字符串资源等 */
 public class Notes {
     public static final String AUTHORITY = "micode_notes";
     public static final String TAG = "Notes";
@@ -53,11 +54,13 @@ public class Notes {
 
     /**
      * Uri to query all notes and folders
+     * 用于内容解析器的Uri，可以理解为内置数据库地址
      */
     public static final Uri CONTENT_NOTE_URI = Uri.parse("content://" + AUTHORITY + "/note");
 
     /**
      * Uri to query data
+     * 用于内容解析器的Uri，可以理解为内置数据库地址
      */
     public static final Uri CONTENT_DATA_URI = Uri.parse("content://" + AUTHORITY + "/data");
 

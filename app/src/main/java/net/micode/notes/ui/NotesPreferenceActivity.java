@@ -47,7 +47,7 @@ import net.micode.notes.data.Notes;
 import net.micode.notes.data.Notes.NoteColumns;
 import net.micode.notes.gtask.remote.GTaskSyncService;
 
-
+/** 显示首选项界面的Activity */
 public class NotesPreferenceActivity extends PreferenceActivity {
     public static final String PREFERENCE_NAME = "notes_preferences";
 
@@ -359,7 +359,7 @@ public class NotesPreferenceActivity extends PreferenceActivity {
                 Context.MODE_PRIVATE);
         return settings.getLong(PREFERENCE_LAST_SYNC_TIME, 0);
     }
-
+    /*  */
     private class GTaskReceiver extends BroadcastReceiver {
 
         @Override

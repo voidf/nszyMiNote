@@ -15,7 +15,7 @@
  */
 
 package net.micode.notes.tool;
-
+/** 字符串常量命名空间类 */
 public class GTaskStringUtils {
 
     public final static String GTASK_JSON_ACTION_ID = "action_id";

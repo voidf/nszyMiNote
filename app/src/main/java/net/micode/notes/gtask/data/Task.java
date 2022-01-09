@@ -31,7 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
+/** 远端任务的json映射实体 */
 public class Task extends Node {
     private static final String TAG = Task.class.getSimpleName();
 
@@ -53,7 +53,7 @@ public class Task extends Node {
         mParent = null;
         mMetaInfo = null;
     }
-
+    /** 构造创建给定id的动作的json */
     public JSONObject getCreateAction(int actionId) {
         JSONObject js = new JSONObject();
 
@@ -102,7 +102,7 @@ public class Task extends Node {
 
         return js;
     }
-
+    /** 构造更新给定id的动作的json，actionId可能作为主键，在GTaskClient中用一个自增计数器维护 */
     public JSONObject getUpdateAction(int actionId) {
         JSONObject js = new JSONObject();
 
@@ -134,7 +134,7 @@ public class Task extends Node {
 
         return js;
     }
-
+    /** 用远端返回的json设置各种状态 */
     public void setContentByRemoteJSON(JSONObject js) {
         if (js != null) {
             try {
@@ -174,7 +174,7 @@ public class Task extends Node {
             }
         }
     }
-
+    /** 根据本地json设置状态 */
     public void setContentByLocalJSON(JSONObject js) {
         if (js == null || !js.has(GTaskStringUtils.META_HEAD_NOTE)
                 || !js.has(GTaskStringUtils.META_HEAD_DATA)) {
@@ -203,7 +203,7 @@ public class Task extends Node {
             e.printStackTrace();
         }
     }
-
+    /** 自身mMetaInfo信息序列化为json */
     public JSONObject getLocalJSONFromContent() {
         String name = getName();
         try {
@@ -246,7 +246,7 @@ public class Task extends Node {
             return null;
         }
     }
-
+    /** 写入元数据 */
     public void setMetaInfo(MetaData metaData) {
         if (metaData != null && metaData.getNotes() != null) {
             try {
@@ -257,7 +257,7 @@ public class Task extends Node {
             }
         }
     }
-
+    /** 对于游标处的数据，应该做出什么样的同步动作 */
     public int getSyncAction(Cursor c) {
         try {
             JSONObject noteInfo = null;
@@ -310,7 +310,7 @@ public class Task extends Node {
 
         return SYNC_ACTION_ERROR;
     }
-
+    /** 数据是否有效且值得保存 */
     public boolean isWorthSaving() {
         return mMetaInfo != null || (getName() != null && getName().trim().length() > 0)
                 || (getNotes() != null && getNotes().trim().length() > 0);

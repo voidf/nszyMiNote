@@ -37,7 +37,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-
+/** 处理JSON和数据库模式相互对接的数据类 */
 public class SqlNote {
     private static final String TAG = SqlNote.class.getSimpleName();
 

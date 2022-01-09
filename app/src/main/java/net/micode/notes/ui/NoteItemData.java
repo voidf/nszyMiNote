@@ -25,7 +25,7 @@ import net.micode.notes.data.Notes;
 import net.micode.notes.data.Notes.NoteColumns;
 import net.micode.notes.tool.DataUtils;
 
-/* 列表元素数据模型，属于模型层 */
+/** 列表元素数据模型，属于模型层 */
 public class NoteItemData {
     static final String [] PROJECTION = new String [] {
         NoteColumns.ID,
@@ -75,7 +75,7 @@ public class NoteItemData {
     private boolean mIsOnlyOneItem;
     private boolean mIsOneNoteFollowingFolder;
     private boolean mIsMultiNotesFollowingFolder;
-    /* 构造函数：从游标处拿一条数据放到实例里 */
+    /** 构造函数：从游标处拿一条数据放到实例里 */
     public NoteItemData(Context context, Cursor cursor) {
         mId = cursor.getLong(ID_COLUMN);
         mAlertDate = cursor.getLong(ALERTED_DATE_COLUMN);
@@ -108,7 +108,7 @@ public class NoteItemData {
         }
         checkPostion(cursor);
     }
-    /* 判断位置 */
+    /** 判断位置，可能可以用来合并同类便签 */
     private void checkPostion(Cursor cursor) {
         mIsLastItem = cursor.isLast() ? true : false;
         mIsFirstItem = cursor.isFirst() ? true : false;
@@ -146,7 +146,7 @@ public class NoteItemData {
     public boolean isLast() {
         return mIsLastItem;
     }
-    /* 拿联系人名 */
+    /** 拿联系人名 */
     public String getCallName() {
         return mName;
     }

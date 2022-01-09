@@ -24,7 +24,7 @@ import net.micode.notes.tool.GTaskStringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
+/** 元数据类 */
 public class MetaData extends Task {
     private final static String TAG = MetaData.class.getSimpleName();
 

@@ -60,7 +60,7 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
-
+/* 网络层工具类，对接谷歌日历/任务 */
 public class GTaskClient {
     private static final String TAG = GTaskClient.class.getSimpleName();
 
@@ -101,14 +101,14 @@ public class GTaskClient {
         mAccount = null;
         mUpdateArray = null;
     }
-
+    /* 拿单例 */
     public static synchronized GTaskClient getInstance() {
         if (mInstance == null) {
             mInstance = new GTaskClient();
         }
         return mInstance;
     }
-
+    /* 实现登录，如果超过5min就重新登录，返回登录是否成功 */
     public boolean login(Activity activity) {
         // we suppose that the cookie would expire after 5 minutes
         // then we need to re-login
@@ -163,7 +163,7 @@ public class GTaskClient {
         mLoggedin = true;
         return true;
     }
-
+    /* 登录谷歌账号，invalidateToken指定是否释放令牌（应用程序有责任在令牌失效时释放令牌），使用了麻烦的AccountManager机制 */
     private String loginGoogleAccount(Activity activity, boolean invalidateToken) {
         String authToken;
         AccountManager accountManager = AccountManager.get(activity);
@@ -224,7 +224,7 @@ public class GTaskClient {
         }
         return true;
     }
-
+    /** 用给定的令牌登录谷歌任务（GTask），返回是否登录成功，写入mClientVersion，cookie可能会写入mHttpClient */
     private boolean loginGtask(String authToken) {
         int timeoutConnection = 10000;
         int timeoutSocket = 15000;
@@ -279,18 +279,18 @@ public class GTaskClient {
 
         return true;
     }
-
+    /** 自增计数器生成action id */
     private int getActionId() {
         return mActionId++;
     }
-
+    /** 构造urlencoded的form请求头  */
     private HttpPost createHttpPost() {
         HttpPost httpPost = new HttpPost(mPostUrl);
         httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
         httpPost.setHeader("AT", "1");
         return httpPost;
     }
-
+    /** 处理HTTP gzip / deflate 压缩，返回请求正文 */
     private String getResponseContent(HttpEntity entity) throws IOException {
         String contentEncoding = null;
         if (entity.getContentEncoding() != null) {
@@ -322,7 +322,7 @@ public class GTaskClient {
             input.close();
         }
     }
-
+    /** 把json序列化为字符串，然后以form形式发送(application/json不行吗) */
     private JSONObject postRequest(JSONObject js) throws NetworkFailureException {
         if (!mLoggedin) {
             Log.e(TAG, "please login first");
@@ -359,7 +359,7 @@ public class GTaskClient {
             throw new ActionFailureException("error occurs when posting request");
         }
     }
-
+    /** 构造一个Task请求，如果成功则写入task的mGid */
     public void createTask(Task task) throws NetworkFailureException {
         commitUpdate();
         try {
@@ -385,7 +385,7 @@ public class GTaskClient {
             throw new ActionFailureException("create task: handing jsonobject failed");
         }
     }
-
+    /** 构造并向远端发送任务表，将gid结果写回 */
     public void createTaskList(TaskList tasklist) throws NetworkFailureException {
         commitUpdate();
         try {
@@ -411,7 +411,7 @@ public class GTaskClient {
             throw new ActionFailureException("create tasklist: handing jsonobject failed");
         }
     }
-
+    /** 提交现有更新操作 */
     public void commitUpdate() throws NetworkFailureException {
         if (mUpdateArray != null) {
             try {
@@ -432,7 +432,7 @@ public class GTaskClient {
             }
         }
     }
-
+    /** 增加一条更新操作动作 */
     public void addUpdateNode(Node node) throws NetworkFailureException {
         if (node != null) {
             // too many update items may result in an error
@@ -446,7 +446,7 @@ public class GTaskClient {
             mUpdateArray.put(node.getUpdateAction(getActionId()));
         }
     }
-
+    /** 向远端报告一个移动任务动作，将任务task从preParent移动到curParent中 */
     public void moveTask(Task task, TaskList preParent, TaskList curParent)
             throws NetworkFailureException {
         commitUpdate();
@@ -485,7 +485,7 @@ public class GTaskClient {
             throw new ActionFailureException("move task: handing jsonobject failed");
         }
     }
-
+    /** 删除一个节点 */
     public void deleteNode(Node node) throws NetworkFailureException {
         commitUpdate();
         try {
@@ -508,7 +508,7 @@ public class GTaskClient {
             throw new ActionFailureException("delete node: handing jsonobject failed");
         }
     }
-
+    /** 从云端拉下来所有任务表，包装成json */
     public JSONArray getTaskLists() throws NetworkFailureException {
         if (!mLoggedin) {
             Log.e(TAG, "please login first");
@@ -546,7 +546,7 @@ public class GTaskClient {
             throw new ActionFailureException("get task lists: handing jasonobject failed");
         }
     }
-
+    /** 用gid拿任务表 */
     public JSONArray getTaskList(String listGid) throws NetworkFailureException {
         commitUpdate();
         try {

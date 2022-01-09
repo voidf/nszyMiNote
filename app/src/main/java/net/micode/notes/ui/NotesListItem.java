@@ -29,7 +29,7 @@ import net.micode.notes.data.Notes;
 import net.micode.notes.tool.DataUtils;
 import net.micode.notes.tool.ResourceParser.NoteItemBgResources;
 
-/* 便签列表的单元素，视图类 */
+/** 便签列表的单元素，视图类，DONE */
 public class NotesListItem extends LinearLayout {
     private ImageView mAlert;
     private TextView mTitle;

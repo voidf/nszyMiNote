@@ -30,7 +30,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
-/* 绑定数据库的数据到主界面列表里面的视图元素上 */
+/** 绑定数据库的数据到主界面列表里面的视图元素上，DONE */
 public class NotesListAdapter extends CursorAdapter {
     private static final String TAG = "NotesListAdapter";
     private Context mContext;

@@ -19,7 +19,7 @@ package net.micode.notes.gtask.data;
 import android.database.Cursor;
 
 import org.json.JSONObject;
-
+/** 同步google task用的任务节点抽象类，信息储存实体，json可序列化对象 */
 public abstract class Node {
     public static final int SYNC_ACTION_NONE = 0;
 

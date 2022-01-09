@@ -47,7 +47,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 
-
+/** 管理同步任务的单例工具类 */
 public class GTaskManager {
     private static final String TAG = GTaskManager.class.getSimpleName();
 
@@ -98,7 +98,7 @@ public class GTaskManager {
         mGidToNid = new HashMap<String, Long>();
         mNidToGid = new HashMap<Long, String>();
     }
-
+    /** 线程安全地获取单例 */
     public static synchronized GTaskManager getInstance() {
         if (mInstance == null) {
             mInstance = new GTaskManager();
@@ -110,7 +110,7 @@ public class GTaskManager {
         // used for getting authtoken
         mActivity = activity;
     }
-
+    /** 执行同步 */
     public int sync(Context context, GTaskASyncTask asyncTask) {
         if (mSyncing) {
             Log.d(TAG, "Sync is in progress");
@@ -167,7 +167,7 @@ public class GTaskManager {
 
         return mCancelled ? STATE_SYNC_CANCELLED : STATE_SUCCESS;
     }
-
+    /** 下载任务表，塞到mGTaskHashMap里 */
     private void initGTaskList() throws NetworkFailureException {
         if (mCancelled)
             return;
@@ -246,7 +246,7 @@ public class GTaskManager {
             throw new ActionFailureException("initGTaskList: handing JSONObject failed");
         }
     }
-
+    /**  */
     private void syncContent() throws NetworkFailureException {
         int syncType;
         Cursor c = null;

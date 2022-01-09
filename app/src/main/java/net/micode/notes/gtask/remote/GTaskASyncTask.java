@@ -30,7 +30,7 @@ import net.micode.notes.R;
 import net.micode.notes.ui.NotesListActivity;
 import net.micode.notes.ui.NotesPreferenceActivity;
 
-
+/** 异步GTask后台同步任务 */
 public class GTaskASyncTask extends AsyncTask<Void, String, Integer> {
 
     private static int GTASK_SYNC_NOTIFICATION_ID = 5234235;
@@ -46,7 +46,7 @@ public class GTaskASyncTask extends AsyncTask<Void, String, Integer> {
     private GTaskManager mTaskManager;
 
     private OnCompleteListener mOnCompleteListener;
-
+    /** 构造函数，同步完成后会调用listener */
     public GTaskASyncTask(Context context, OnCompleteListener listener) {
         mContext = context;
         mOnCompleteListener = listener;
@@ -58,13 +58,13 @@ public class GTaskASyncTask extends AsyncTask<Void, String, Integer> {
     public void cancelSync() {
         mTaskManager.cancelSync();
     }
-
+    /** 报告任务进度用的，这里没用 */
     public void publishProgess(String message) {
         publishProgress(new String[] {
             message
         });
     }
-
+    /** 上拉横幅提醒content字符串 */
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void showNotification(int tickerId, String content) {
 
@@ -102,7 +102,7 @@ public class GTaskASyncTask extends AsyncTask<Void, String, Integer> {
                 .getSyncAccountName(mContext)));
         return mTaskManager.sync(mContext, this);
     }
-
+    /** 显示同步便签中 */
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onProgressUpdate(String... progress) {
@@ -111,7 +111,7 @@ public class GTaskASyncTask extends AsyncTask<Void, String, Integer> {
             ((GTaskSyncService) mContext).sendBroadcast(progress[0]);
         }
     }
-
+    /** 任务执行结束后调用，横幅报告执行结果，开新线程跑listener */
     @Override
     protected void onPostExecute(Integer result) {
         if (result == GTaskManager.STATE_SUCCESS) {

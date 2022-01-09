@@ -34,7 +34,7 @@ import net.micode.notes.gtask.exception.ActionFailureException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
+/** 直接对接数据库的数据类 */
 public class SqlData {
     private static final String TAG = SqlData.class.getSimpleName();
 
@@ -54,7 +54,7 @@ public class SqlData {
     public static final int DATA_CONTENT_DATA_1_COLUMN = 3;
 
     public static final int DATA_CONTENT_DATA_3_COLUMN = 4;
-
+    /** 此处的ctx是GTaskSyncService，只有那个服务调用了这里 */
     private ContentResolver mContentResolver;
 
     private boolean mIsCreate;
