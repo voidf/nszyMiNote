@@ -77,6 +77,7 @@ public class NoteItemData {
     private boolean mIsMultiNotesFollowingFolder;
     /** 构造函数：从游标处拿一条数据放到实例里 */
     public NoteItemData(Context context, Cursor cursor) {
+        //get转换格式
         mId = cursor.getLong(ID_COLUMN);
         mAlertDate = cursor.getLong(ALERTED_DATE_COLUMN);
         mBgColorId = cursor.getInt(BG_COLOR_ID_COLUMN);
@@ -91,7 +92,7 @@ public class NoteItemData {
         mType = cursor.getInt(TYPE_COLUMN);
         mWidgetId = cursor.getInt(WIDGET_ID_COLUMN);
         mWidgetType = cursor.getInt(WIDGET_TYPE_COLUMN);
-
+        //初始化电话号码的信息
         mPhoneNumber = "";
         if (mParentId == Notes.ID_CALL_RECORD_FOLDER) {
             mPhoneNumber = DataUtils.getCallNumberByNoteId(context.getContentResolver(), mId);
@@ -214,7 +215,7 @@ public class NoteItemData {
     public boolean hasAlert() {
         return (mAlertDate > 0);
     }
-
+    //若数据父id为保存至文件夹模式的id且满足电话号码单元不为空，则isCallRecord为true
     public boolean isCallRecord() {
         return (mParentId == Notes.ID_CALL_RECORD_FOLDER && !TextUtils.isEmpty(mPhoneNumber));
     }

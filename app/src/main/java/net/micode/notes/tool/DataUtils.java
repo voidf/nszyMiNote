@@ -37,6 +37,7 @@ import java.util.HashSet;
 
 public class DataUtils {
     public static final String TAG = "DataUtils";
+    //直接删除多个笔记
     public static boolean batchDeleteNotes(ContentResolver resolver, HashSet<Long> ids) {
         if (ids == null) {
             Log.d(TAG, "the ids is null");
@@ -46,19 +47,22 @@ public class DataUtils {
             Log.d(TAG, "no id is in the hashset");
             return true;
         }
-
+        //提供一个任务列表
         ArrayList<ContentProviderOperation> operationList = new ArrayList<ContentProviderOperation>();
         for (long id : ids) {
             if(id == Notes.ID_ROOT_FOLDER) {
                 Log.e(TAG, "Don't delete system folder root");
                 continue;
             }
+            //如果发现是根文件夹，则不删除
             ContentProviderOperation.Builder builder = ContentProviderOperation
                     .newDelete(ContentUris.withAppendedId(Notes.CONTENT_NOTE_URI, id));
+                    //用newDelete实现删除功能
             operationList.add(builder.build());
         }
         try {
             ContentProviderResult[] results = resolver.applyBatch(Notes.AUTHORITY, operationList);
+            //数据库事务，数据库事务是由一组数据库操作序列组成，事务作为一个整体被执行
             if (results == null || results.length == 0 || results[0] == null) {
                 Log.d(TAG, "delete notes failed, ids:" + ids.toString());
                 return false;
@@ -78,6 +82,7 @@ public class DataUtils {
         values.put(NoteColumns.ORIGIN_PARENT_ID, srcFolderId);
         values.put(NoteColumns.LOCAL_MODIFIED, 1);
         resolver.update(ContentUris.withAppendedId(Notes.CONTENT_NOTE_URI, id), values, null, null);
+        //对需要移动的便签进行数据更新，然后用update实现
     }
 
     public static boolean batchMoveToFolder(ContentResolver resolver, HashSet<Long> ids,
@@ -91,13 +96,14 @@ public class DataUtils {
         for (long id : ids) {
             ContentProviderOperation.Builder builder = ContentProviderOperation
                     .newUpdate(ContentUris.withAppendedId(Notes.CONTENT_NOTE_URI, id));
+                    //通过withAppendedId方法，为该Uri加上ID
             builder.withValue(NoteColumns.PARENT_ID, folderId);
             builder.withValue(NoteColumns.LOCAL_MODIFIED, 1);
             operationList.add(builder.build());
-        }
+        }//将ids里包含的每一列的数据逐次加入到operationList中，等待最后的批量处理
 
         try {
-            ContentProviderResult[] results = resolver.applyBatch(Notes.AUTHORITY, operationList);
+            ContentProviderResult[] results = resolver.applyBatch(Notes.AUTHORITY, operationList);//applyBatch一次性处理一个操作列表
             if (results == null || results.length == 0 || results[0] == null) {
                 Log.d(TAG, "delete notes failed, ids:" + ids.toString());
                 return false;
@@ -119,7 +125,7 @@ public class DataUtils {
                 new String[] { "COUNT(*)" },
                 NoteColumns.TYPE + "=? AND " + NoteColumns.PARENT_ID + "<>?",
                 new String[] { String.valueOf(Notes.TYPE_FOLDER), String.valueOf(Notes.ID_TRASH_FOLER)},
-                null);
+                null);//条件：源文件不为trash folder
 
         int count = 0;
         if(cursor != null) {
@@ -137,15 +143,15 @@ public class DataUtils {
     }
 
     public static boolean visibleInNoteDatabase(ContentResolver resolver, long noteId, int type) {
-        Cursor cursor = resolver.query(ContentUris.withAppendedId(Notes.CONTENT_NOTE_URI, noteId),
+        Cursor cursor = resolver.query(ContentUris.withAppendedId(Notes.CONTENT_NOTE_URI, noteId),//通过withAppendedId方法，为该Uri加上ID
                 null,
                 NoteColumns.TYPE + "=? AND " + NoteColumns.PARENT_ID + "<>" + Notes.ID_TRASH_FOLER,
                 new String [] {String.valueOf(type)},
-                null);
+                null);//条件：type符合，且不属于垃圾文件夹
 
         boolean exist = false;
         if (cursor != null) {
-            if (cursor.getCount() > 0) {
+            if (cursor.getCount() > 0) {//用getcount函数判断cursor是否为空
                 exist = true;
             }
             cursor.close();
@@ -187,6 +193,7 @@ public class DataUtils {
                 " AND " + NoteColumns.PARENT_ID + "<>" + Notes.ID_TRASH_FOLER +
                 " AND " + NoteColumns.SNIPPET + "=?",
                 new String[] { name }, null);
+        //通过名字查询文件是否存在
         boolean exist = false;
         if(cursor != null) {
             if(cursor.getCount() > 0) {
@@ -202,7 +209,7 @@ public class DataUtils {
                 new String[] { NoteColumns.WIDGET_ID, NoteColumns.WIDGET_TYPE },
                 NoteColumns.PARENT_ID + "=?",
                 new String[] { String.valueOf(folderId) },
-                null);
+                null);//条件：父ID是传入的folderId;
 
         HashSet<AppWidgetAttribute> set = null;
         if (c != null) {
@@ -211,13 +218,14 @@ public class DataUtils {
                 do {
                     try {
                         AppWidgetAttribute widget = new AppWidgetAttribute();
-                        widget.widgetId = c.getInt(0);
-                        widget.widgetType = c.getInt(1);
+                        widget.widgetId = c.getInt(0);  //0对应的NoteColumns.WIDGET_ID
+                        widget.widgetType = c.getInt(1);  //1对应的NoteColumns.WIDGET_TYPE
                         set.add(widget);
                     } catch (IndexOutOfBoundsException e) {
                         Log.e(TAG, e.toString());
                     }
                 } while (c.moveToNext());
+                //查询下一条
             }
             c.close();
         }
@@ -250,7 +258,7 @@ public class DataUtils {
                 + CallNote.PHONE_NUMBER + ",?)",
                 new String [] { String.valueOf(callDate), CallNote.CONTENT_ITEM_TYPE, phoneNumber },
                 null);
-
+        //通过数据库操作，查询条件是（callDate和phoneNumber匹配传入参数的值
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 try {
@@ -269,7 +277,7 @@ public class DataUtils {
                 new String [] { NoteColumns.SNIPPET },
                 NoteColumns.ID + "=?",
                 new String [] { String.valueOf(noteId)},
-                null);
+                null);//条件：noteId
 
         if (cursor != null) {
             String snippet = "";
@@ -281,7 +289,7 @@ public class DataUtils {
         }
         throw new IllegalArgumentException("Note is not found with id: " + noteId);
     }
-
+    //对字符串进行格式处理，将字符串两头的空格去掉，同时将换行符去掉
     public static String getFormattedSnippet(String snippet) {
         if (snippet != null) {
             snippet = snippet.trim();

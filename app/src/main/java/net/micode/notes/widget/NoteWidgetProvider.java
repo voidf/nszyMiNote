@@ -32,6 +32,9 @@ import net.micode.notes.tool.ResourceParser;
 import net.micode.notes.ui.NoteEditActivity;
 import net.micode.notes.ui.NotesListActivity;
 
+/**
+ * 继承自AppWidgetProvider类，创建桌面小部件
+ */
 public abstract class NoteWidgetProvider extends AppWidgetProvider {
     public static final String [] PROJECTION = new String [] {
         NoteColumns.ID,

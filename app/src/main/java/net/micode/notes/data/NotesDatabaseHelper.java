@@ -26,7 +26,9 @@ import net.micode.notes.data.Notes.DataColumns;
 import net.micode.notes.data.Notes.DataConstants;
 import net.micode.notes.data.Notes.NoteColumns;
 
-
+/**
+ * 继承SQLiteOpenHelper，帮助方便管理数据库插入，查询等操作
+ */
 public class NotesDatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "note.db";
 

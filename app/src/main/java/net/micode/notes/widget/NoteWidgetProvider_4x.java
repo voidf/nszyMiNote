@@ -23,7 +23,9 @@ import net.micode.notes.R;
 import net.micode.notes.data.Notes;
 import net.micode.notes.tool.ResourceParser;
 
-
+/**
+ * 4X4桌面小部件
+ */
 public class NoteWidgetProvider_4x extends NoteWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {

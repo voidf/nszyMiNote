@@ -34,6 +34,9 @@ import net.micode.notes.data.Notes.DataColumns;
 import net.micode.notes.data.Notes.NoteColumns;
 import net.micode.notes.data.NotesDatabaseHelper.TABLE;
 
+/**
+ * 继承ContentProvider，为不同的应用之间数据共享，提供统一的接口
+ */
 
 public class NotesProvider extends ContentProvider {
     private static final UriMatcher mMatcher;
