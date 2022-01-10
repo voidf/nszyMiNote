@@ -764,10 +764,11 @@ public class NotesListActivity extends AppCompatActivity implements OnClickListe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        Log.d("【【【】】】", "inflating");
+//        boolean res = super.onCreateOptionsMenu(menu);
+        Log.d("【【【】】】", "inflating ");
         getMenuInflater().inflate(R.menu.note_list, menu);
-        return true;
+//        return res;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override

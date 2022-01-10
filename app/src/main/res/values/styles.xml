@@ -58,12 +58,17 @@
         <item name="android:textColor">@color/secondary_text_dark</item>
     </style>
 
-    <style name="NoteTheme" parent="@android:style/Theme.Holo.Light">
+    <style name="NoteTheme" parent="@style/Theme.AppCompat.Light">
         <item name="actionBarStyle">@style/NoteActionBarStyle</item>
     </style>
 
-    <style name="NoteActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
+    <style name="NoteActionBarStyle" parent="@style/Theme.AppCompat.Light">
         <item name="displayOptions" />
         <item name="android:visibility">gone</item>
     </style>
+
+    <style name="Theme.MyApplication.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.MyApplication.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

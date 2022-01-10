@@ -17,7 +17,9 @@
 
     <application
         android:icon="@drawable/icon_app"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:label="@string/app_name" >
+
         <activity
             android:name=".ui.NotesListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -117,7 +119,7 @@
             android:name=".ui.AlarmAlertActivity"
             android:label="@string/app_name"
             android:launchMode="singleInstance"
-            android:theme="@android:style/Theme.Holo.Wallpaper.NoTitleBar" >
+            android:theme="@style/Theme.AppCompat.Light" >
         </activity>
 
         <activity

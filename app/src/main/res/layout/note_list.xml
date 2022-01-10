@@ -21,10 +21,16 @@
     android:layout_height="fill_parent"
     android:background="@drawable/list_background">
 
+
+
+
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical">
+
+
 
         <TextView
             android:id="@+id/tv_title_bar"
@@ -36,6 +42,15 @@
             android:textColor="#FFEAD1AE"
             android:textSize="@dimen/text_font_size_medium"
             android:visibility="gone" />
+
+
+
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/fab"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="bottom|end"-->
+<!--            android:layout_margin="16dp"/>-->
 
         <ListView
             android:id="@+id/notes_list"
