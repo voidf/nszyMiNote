@@ -50,8 +50,10 @@ public class Note {
         values.put(NoteColumns.TYPE, Notes.TYPE_NOTE);
         values.put(NoteColumns.LOCAL_MODIFIED, 1);
         values.put(NoteColumns.PARENT_ID, folderId);
+        //将数据写入数据库表格
         Uri uri = context.getContentResolver().insert(Notes.CONTENT_NOTE_URI, values);
-
+        //ContentResolver()主要是实现外部应用对ContentProvider中的数据
+        //进行添加、删除、修改和查询操作
         long noteId = 0;
         try {
             noteId = Long.valueOf(uri.getPathSegments().get(1));
@@ -64,42 +66,42 @@ public class Note {
         }
         return noteId;
     }
-
+    //定义两个变量用来存储便签的数据，一个是存储便签属性、一个是存储便签内容
     public Note() {
         mNoteDiffValues = new ContentValues();
         mNoteData = new NoteData();
     }
-
+    //设置数据库表格的标签属性数据
     public void setNoteValue(String key, String value) {
         mNoteDiffValues.put(key, value);
         mNoteDiffValues.put(NoteColumns.LOCAL_MODIFIED, 1);
         mNoteDiffValues.put(NoteColumns.MODIFIED_DATE, System.currentTimeMillis());
     }
-
+    //设置数据库表格的标签文本内容的数据
     public void setTextData(String key, String value) {
         mNoteData.setTextData(key, value);
     }
-
+    //设置文本数据的ID
     public void setTextDataId(long id) {
         mNoteData.setTextDataId(id);
     }
-
+    //得到文本数据的ID
     public long getTextDataId() {
         return mNoteData.mTextDataId;
     }
-
+    //设置电话号码数据的ID
     public void setCallDataId(long id) {
         mNoteData.setCallDataId(id);
     }
-
+    //得到电话号码数据的ID
     public void setCallData(String key, String value) {
         mNoteData.setCallData(key, value);
     }
-
+    //判断是否是本地修改
     public boolean isLocalModified() {
         return mNoteDiffValues.size() > 0 || mNoteData.isLocalModified();
     }
-
+    //判断数据是否同步
     public boolean syncNote(Context context, long noteId) {
         if (noteId <= 0) {
             throw new IllegalArgumentException("Wrong note id:" + noteId);
@@ -129,14 +131,14 @@ public class Note {
 
         return true;
     }
-
+    //定义一个基本的便签内容的数据类，主要包含文本数据和电话号码数据
     private class NoteData {
         private long mTextDataId;
-
+        //文本数据
         private ContentValues mTextDataValues;
 
         private long mCallDataId;
-
+        //电话号码数据
         private ContentValues mCallDataValues;
 
         private static final String TAG = "NoteData";
@@ -147,7 +149,7 @@ public class Note {
             mTextDataId = 0;
             mCallDataId = 0;
         }
-
+        //下面是上述几个函数的具体实现
         boolean isLocalModified() {
             return mTextDataValues.size() > 0 || mCallDataValues.size() > 0;
         }
@@ -177,18 +179,20 @@ public class Note {
             mNoteDiffValues.put(NoteColumns.LOCAL_MODIFIED, 1);
             mNoteDiffValues.put(NoteColumns.MODIFIED_DATE, System.currentTimeMillis());
         }
-
+        //下面函数的作用是将新的数据通过Uri的操作存储到数据库
         Uri pushIntoContentResolver(Context context, long noteId) {
             /**
              * Check for safety
              */
+            //判断数据是否合法
             if (noteId <= 0) {
                 throw new IllegalArgumentException("Wrong note id:" + noteId);
             }
 
             ArrayList<ContentProviderOperation> operationList = new ArrayList<ContentProviderOperation>();
             ContentProviderOperation.Builder builder = null;
-
+            //数据库的操作列表
+            //把文本数据存入DataColumns
             if(mTextDataValues.size() > 0) {
                 mTextDataValues.put(DataColumns.NOTE_ID, noteId);
                 if (mTextDataId == 0) {
@@ -210,7 +214,7 @@ public class Note {
                 }
                 mTextDataValues.clear();
             }
-
+            //把电话号码数据存入DataColumns
             if(mCallDataValues.size() > 0) {
                 mCallDataValues.put(DataColumns.NOTE_ID, noteId);
                 if (mCallDataId == 0) {
@@ -232,7 +236,7 @@ public class Note {
                 }
                 mCallDataValues.clear();
             }
-
+            //存储过程中的异常处理
             if (operationList.size() > 0) {
                 try {
                     ContentProviderResult[] results = context.getContentResolver().applyBatch(

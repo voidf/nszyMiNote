@@ -40,9 +40,10 @@ public class BackupUtils {
     private static final String TAG = "BackupUtils";
     // Singleton stuff
     private static BackupUtils sInstance;
-
+    //它包括两种用法：synchronized 方法和 synchronized 块。
     public static synchronized BackupUtils getInstance(Context context) {
         if (sInstance == null) {
+            //如果当前备份不存在，则新声明一个
             sInstance = new BackupUtils(context);
         }
         return sInstance;
@@ -53,22 +54,28 @@ public class BackupUtils {
      * status
      */
     // Currently, the sdcard is not mounted
+    // SD卡没有被装入手机
     public static final int STATE_SD_CARD_UNMOUONTED           = 0;
     // The backup file not exist
+    // 备份文件夹不存在
     public static final int STATE_BACKUP_FILE_NOT_EXIST        = 1;
     // The data is not well formated, may be changed by other programs
+    // 数据已被破坏，可能被修改
     public static final int STATE_DATA_DESTROIED               = 2;
     // Some run-time exception which causes restore or backup fails
+    // 超时异常
     public static final int STATE_SYSTEM_ERROR                 = 3;
     // Backup or restore success
+    // 成功存储
     public static final int STATE_SUCCESS                      = 4;
 
     private TextExport mTextExport;
 
     private BackupUtils(Context context) {
+        //初始化函数
         mTextExport = new TextExport(context);
     }
-
+    //外部存储功能是否可用
     private static boolean externalStorageAvailable() {
         return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
     }
@@ -133,6 +140,7 @@ public class BackupUtils {
         }
 
         private String getFormat(int id) {
+            //获取文本的组成部分
             return TEXT_FORMAT[id];
         }
 
@@ -141,6 +149,7 @@ public class BackupUtils {
          */
         private void exportFolderToText(String folderId, PrintStream ps) {
             // Query notes belong to this folder
+            // 通过查询parent id是文件夹id的note来选出制定ID文件夹下的Note
             Cursor notesCursor = mContext.getContentResolver().query(Notes.CONTENT_NOTE_URI,
                     NOTE_PROJECTION, NoteColumns.PARENT_ID + "=?", new String[] {
                         folderId
@@ -150,12 +159,14 @@ public class BackupUtils {
                 if (notesCursor.moveToFirst()) {
                     do {
                         // Print note's last modified date
+                        // ps里面保存有这份note的日期
                         ps.println(String.format(getFormat(FORMAT_NOTE_DATE), DateFormat.format(
                                 mContext.getString(R.string.format_datetime_mdhm),
                                 notesCursor.getLong(NOTE_COLUMN_MODIFIED_DATE))));
                         // Query data belong to this note
                         String noteId = notesCursor.getString(NOTE_COLUMN_ID);
                         exportNoteToText(noteId, ps);
+                        //将文件导出到text
                     } while (notesCursor.moveToNext());
                 }
                 notesCursor.close();
@@ -172,6 +183,7 @@ public class BackupUtils {
                     }, null);
 
             if (dataCursor != null) {
+                //利用光标来扫描内容，区别为callnote和note两种，靠ps.printline输出
                 if (dataCursor.moveToFirst()) {
                     do {
                         String mimeType = dataCursor.getString(DATA_COLUMN_MIME_TYPE);
@@ -182,6 +194,7 @@ public class BackupUtils {
                             String location = dataCursor.getString(DATA_COLUMN_CONTENT);
 
                             if (!TextUtils.isEmpty(phoneNumber)) {
+                                //判断是否为空字符
                                 ps.println(String.format(getFormat(FORMAT_NOTE_CONTENT),
                                         phoneNumber));
                             }
@@ -219,6 +232,7 @@ public class BackupUtils {
          * Note will be exported as text which is user readable
          */
         public int exportToText() {
+            //总函数，调用上面的exportFolder和exportNote
             if (!externalStorageAvailable()) {
                 Log.d(TAG, "Media was not mounted");
                 return STATE_SD_CARD_UNMOUONTED;
@@ -230,6 +244,7 @@ public class BackupUtils {
                 return STATE_SYSTEM_ERROR;
             }
             // First export folder and its notes
+            // 导出文件夹，就是导出里面包含的便签
             Cursor folderCursor = mContext.getContentResolver().query(
                     Notes.CONTENT_NOTE_URI,
                     NOTE_PROJECTION,
@@ -258,6 +273,7 @@ public class BackupUtils {
             }
 
             // Export notes in root's folder
+            // 将根目录里的便签导出
             Cursor noteCursor = mContext.getContentResolver().query(
                     Notes.CONTENT_NOTE_URI,
                     NOTE_PROJECTION,
@@ -298,6 +314,7 @@ public class BackupUtils {
             try {
                 FileOutputStream fos = new FileOutputStream(file);
                 ps = new PrintStream(fos);
+                //将ps输出流输出到特定的文件，目的就是导出到文件，而不是直接输出
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 return null;
@@ -314,16 +331,16 @@ public class BackupUtils {
      */
     private static File generateFileMountedOnSDcard(Context context, int filePathResId, int fileNameFormatResId) {
         StringBuilder sb = new StringBuilder();
-        sb.append(Environment.getExternalStorageDirectory());
-        sb.append(context.getString(filePathResId));
-        File filedir = new File(sb.toString());
+        sb.append(Environment.getExternalStorageDirectory());  //外部（SD卡）的存储路径
+        sb.append(context.getString(filePathResId));    //文件的存储路径
+        File filedir = new File(sb.toString());        //filedir应该就是用来存储路径信息
         sb.append(context.getString(
                 fileNameFormatResId,
                 DateFormat.format(context.getString(R.string.format_date_ymd),
                         System.currentTimeMillis())));
         File file = new File(sb.toString());
 
-        try {
+        try {//如果这些文件不存在，则新建
             if (!filedir.exists()) {
                 filedir.mkdir();
             }
@@ -336,7 +353,7 @@ public class BackupUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        // try catch 异常处理
         return null;
     }
 }

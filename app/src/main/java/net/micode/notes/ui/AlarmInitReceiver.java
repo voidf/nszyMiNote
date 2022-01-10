@@ -27,24 +27,26 @@ import android.database.Cursor;
 import net.micode.notes.data.Notes;
 import net.micode.notes.data.Notes.NoteColumns;
 
-
+/** 系统开机时处理已有的便签*/
 public class AlarmInitReceiver extends BroadcastReceiver {
 
     private static final String [] PROJECTION = new String [] {
         NoteColumns.ID,
         NoteColumns.ALERTED_DATE
     };
-
+    //对数据库的操作，调用标签ID和闹钟时间
     private static final int COLUMN_ID                = 0;
     private static final int COLUMN_ALERTED_DATE      = 1;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         long currentDate = System.currentTimeMillis();
+        //System.currentTimeMillis()产生一个当前的毫秒
         Cursor c = context.getContentResolver().query(Notes.CONTENT_NOTE_URI,
                 PROJECTION,
                 NoteColumns.ALERTED_DATE + ">? AND " + NoteColumns.TYPE + "=" + Notes.TYPE_NOTE,
                 new String[] { String.valueOf(currentDate) },
+                //将long变量currentDate转化为字符串
                 null);
 
         if (c != null) {
@@ -60,6 +62,6 @@ public class AlarmInitReceiver extends BroadcastReceiver {
                 } while (c.moveToNext());
             }
             c.close();
-        }
+        }//根据数据库里的闹钟时间创建一个闹钟机制
     }
 }

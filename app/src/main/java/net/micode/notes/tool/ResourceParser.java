@@ -21,7 +21,17 @@ import android.preference.PreferenceManager;
 
 import net.micode.notes.R;
 import net.micode.notes.ui.NotesPreferenceActivity;
-
+/**资源分析器
+ * 实现：主要应用R.java这个类，包括
+ * R.i：组件资源引用
+ * R.drawable：图片资源
+ * R.layout：布局资源
+ * R.menu：菜单资源
+ * R.String：文字资源
+ * R.style：主题资源
+ * @BG_DEFAULT_COLOR 默认背景颜色（黄）
+ * BG_DEFAULT_FONT_SIZE 默认文本大小（中）
+ */
 public class ResourceParser {
 
     public static final int YELLOW           = 0;
@@ -64,7 +74,7 @@ public class ResourceParser {
             return BG_EDIT_TITLE_RESOURCES[id];
         }
     }
-
+    //直接获取默认的背景颜色。
     public static int getDefaultBgId(Context context) {
         if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean(
                 NotesPreferenceActivity.PREFERENCE_SET_BG_COLOR_KEY, false)) {
@@ -161,7 +171,7 @@ public class ResourceParser {
             R.style.TextAppearanceLarge,
             R.style.TextAppearanceSuper
         };
-
+        //容错函数，防止输入的id大于资源总量，若错误，则自动返回默认的设置结果
         public static int getTexAppearanceResource(int id) {
             /**
              * HACKME: Fix bug of store the resource id in shared preference.
