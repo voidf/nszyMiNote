@@ -25,6 +25,9 @@ import android.util.Log;
 
 import java.util.HashMap;
 
+/**主要实现了手机号码到名字的映射，并且对获取手机号码对应的名字的函数进行了封装，当所取对象不在内存中时去数据库中查询
+ *
+ */
 public class Contact {
     private static HashMap<String, String> sContactCache;
     private static final String TAG = "Contact";

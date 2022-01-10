@@ -19,12 +19,14 @@ package net.micode.notes.ui;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-
+/** 循环等待有note需要提醒用户的广播*/
 public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         intent.setClass(context, AlarmAlertActivity.class);
+        //启动AlarmAlertActivity
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //要新建一个栈装入启动的activity
         context.startActivity(intent);
     }
 }
