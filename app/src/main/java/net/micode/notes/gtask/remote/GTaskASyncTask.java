@@ -24,7 +24,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 
 import net.micode.notes.R;
 import net.micode.notes.ui.NotesListActivity;

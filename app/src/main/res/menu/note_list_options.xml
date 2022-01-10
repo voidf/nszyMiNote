@@ -15,17 +15,17 @@
      limitations under the License.
 -->
 
-<menu
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/move"
         android:title="@string/menu_move"
         android:icon="@drawable/menu_move"
-        android:showAsAction="always|withText" />
+        app:showAsAction="always|withText" />
 
     <item
         android:id="@+id/delete"
         android:title="@string/menu_delete"
         android:icon="@drawable/menu_delete"
-        android:showAsAction="always|withText" />
+        app:showAsAction="always|withText" />
 </menu>

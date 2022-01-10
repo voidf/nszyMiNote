@@ -16,8 +16,6 @@
 
 package net.micode.notes.ui;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.appwidget.AppWidgetManager;
 import android.content.AsyncQueryHandler;
@@ -60,6 +58,9 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import net.micode.notes.R;
 import net.micode.notes.data.Notes;
 import net.micode.notes.data.Notes.NoteColumns;
@@ -77,8 +78,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashSet;
+
 /** 总入口，DONE */
-public class NotesListActivity extends Activity implements OnClickListener, OnItemLongClickListener {
+public class NotesListActivity extends AppCompatActivity implements OnClickListener, OnItemLongClickListener {
     private static final int FOLDER_NOTE_LIST_QUERY_TOKEN = 0;
 
     private static final int FOLDER_LIST_QUERY_TOKEN      = 1;
@@ -761,6 +763,14 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        Log.d("【【【】】】", "inflating");
+        getMenuInflater().inflate(R.menu.note_list, menu);
+        return true;
+    }
+
+    @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.clear();
         if (mState == ListEditState.NOTE_LIST) {
@@ -871,7 +881,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
     }
 
     private void startPreferenceActivity() {
-        Activity from = getParent() != null ? getParent() : this;
+        AppCompatActivity from = getParent() != null ? (AppCompatActivity) getParent() : this;
         Intent intent = new Intent(from, NotesPreferenceActivity.class);
         from.startActivityIfNeeded(intent, -1);
     }

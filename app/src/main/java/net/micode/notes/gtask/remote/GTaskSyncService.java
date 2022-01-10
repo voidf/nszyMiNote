@@ -16,12 +16,14 @@
 
 package net.micode.notes.gtask.remote;
 
-import android.app.Activity;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 /** 同步功能的后台服务  */
 public class GTaskSyncService extends Service {
     public final static String ACTION_STRING_NAME = "sync_action_type";
@@ -105,7 +107,7 @@ public class GTaskSyncService extends Service {
         sendBroadcast(intent);
     }
 
-    public static void startSync(Activity activity) {
+    public static void startSync(AppCompatActivity activity) {
         GTaskManager.getInstance().setActivityContext(activity);
         Intent intent = new Intent(activity, GTaskSyncService.class);
         intent.putExtra(GTaskSyncService.ACTION_STRING_NAME, GTaskSyncService.ACTION_START_SYNC);

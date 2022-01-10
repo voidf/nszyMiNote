@@ -16,13 +16,14 @@
 
 package net.micode.notes.gtask.remote;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import net.micode.notes.R;
 import net.micode.notes.data.Notes;
@@ -63,7 +64,7 @@ public class GTaskManager {
 
     private static GTaskManager mInstance = null;
 
-    private Activity mActivity;
+    private AppCompatActivity mActivity;
 
     private Context mContext;
 
@@ -106,7 +107,7 @@ public class GTaskManager {
         return mInstance;
     }
 
-    public synchronized void setActivityContext(Activity activity) {
+    public synchronized void setActivityContext(AppCompatActivity activity) {
         // used for getting authtoken
         mActivity = activity;
     }

@@ -18,8 +18,6 @@ package net.micode.notes.ui;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.app.ActionBar;
-import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -35,12 +33,13 @@ import android.preference.PreferenceCategory;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 
 import net.micode.notes.R;
 import net.micode.notes.data.Notes;
@@ -74,7 +73,7 @@ public class NotesPreferenceActivity extends PreferenceActivity {
         super.onCreate(icicle);
 
         /* using the app icon for navigation */
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         addPreferencesFromResource(R.xml.preferences);
         mAccountCategory = (PreferenceCategory) findPreference(PREFERENCE_SYNC_ACCOUNT_KEY);
@@ -170,7 +169,7 @@ public class NotesPreferenceActivity extends PreferenceActivity {
             syncButton.setText(getString(R.string.preferences_button_sync_immediately));
             syncButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    GTaskSyncService.startSync(NotesPreferenceActivity.this);
+//                    GTaskSyncService.startSync(NotesPreferenceActivity.this);
                 }
             });
         }

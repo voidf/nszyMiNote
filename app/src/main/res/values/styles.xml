@@ -59,11 +59,11 @@
     </style>
 
     <style name="NoteTheme" parent="@android:style/Theme.Holo.Light">
-        <item name="android:actionBarStyle">@style/NoteActionBarStyle</item>
+        <item name="actionBarStyle">@style/NoteActionBarStyle</item>
     </style>
 
     <style name="NoteActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
-        <item name="android:displayOptions" />
+        <item name="displayOptions" />
         <item name="android:visibility">gone</item>
     </style>
 </resources>

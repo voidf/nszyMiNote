@@ -23,7 +23,7 @@
         android:orientation="horizontal">
 
     <Button android:id="@+id/selection_menu"
-            android:divider="?android:attr/listDividerAlertDialog"
+            android:divider="?attr/listDividerAlertDialog"
             android:singleLine="true"
             android:gravity="left|center_vertical"
             android:layout_width="wrap_content"

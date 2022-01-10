@@ -19,10 +19,11 @@ package net.micode.notes.gtask.remote;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerFuture;
-import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import net.micode.notes.gtask.data.Node;
 import net.micode.notes.gtask.data.Task;
@@ -60,7 +61,7 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
-/* 网络层工具类，对接谷歌日历/任务 */
+/** 网络层工具类，对接谷歌日历/任务 */
 public class GTaskClient {
     private static final String TAG = GTaskClient.class.getSimpleName();
 
@@ -109,7 +110,7 @@ public class GTaskClient {
         return mInstance;
     }
     /* 实现登录，如果超过5min就重新登录，返回登录是否成功 */
-    public boolean login(Activity activity) {
+    public boolean login(AppCompatActivity activity) {
         // we suppose that the cookie would expire after 5 minutes
         // then we need to re-login
         final long interval = 1000 * 60 * 5;
@@ -164,7 +165,7 @@ public class GTaskClient {
         return true;
     }
     /* 登录谷歌账号，invalidateToken指定是否释放令牌（应用程序有责任在令牌失效时释放令牌），使用了麻烦的AccountManager机制 */
-    private String loginGoogleAccount(Activity activity, boolean invalidateToken) {
+    private String loginGoogleAccount(AppCompatActivity activity, boolean invalidateToken) {
         String authToken;
         AccountManager accountManager = AccountManager.get(activity);
         Account[] accounts = accountManager.getAccountsByType("com.google");
@@ -207,7 +208,7 @@ public class GTaskClient {
         return authToken;
     }
 
-    private boolean tryToLoginGtask(Activity activity, String authToken) {
+    private boolean tryToLoginGtask(AppCompatActivity activity, String authToken) {
         if (!loginGtask(authToken)) {
             // maybe the auth token is out of date, now let's invalidate the
             // token and try again
