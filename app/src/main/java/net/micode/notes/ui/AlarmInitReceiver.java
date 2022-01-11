@@ -27,7 +27,7 @@ import android.database.Cursor;
 import net.micode.notes.data.Notes;
 import net.micode.notes.data.Notes.NoteColumns;
 
-/** 系统开机时处理已有的便签*/
+/** 系统开机时处理已有的便签 */
 public class AlarmInitReceiver extends BroadcastReceiver {
 
     private static final String [] PROJECTION = new String [] {
@@ -41,7 +41,7 @@ public class AlarmInitReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         long currentDate = System.currentTimeMillis();
-        //System.currentTimeMillis()产生一个当前的毫秒
+        // System.currentTimeMillis()产生一个当前的毫秒级时间戳
         Cursor c = context.getContentResolver().query(Notes.CONTENT_NOTE_URI,
                 PROJECTION,
                 NoteColumns.ALERTED_DATE + ">? AND " + NoteColumns.TYPE + "=" + Notes.TYPE_NOTE,

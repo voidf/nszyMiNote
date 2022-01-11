@@ -36,7 +36,7 @@ public class NotesListAdapter extends CursorAdapter {
     private Context mContext;
     private HashMap<Integer, Boolean> mSelectedIndex;
     private int mNotesCount;//便签数
-    private boolean mChoiceMode;、、选择模式标记
+    private boolean mChoiceMode;// 选择模式标记
     //桌面widget属性，ID,TYPE
     public static class AppWidgetAttribute {
         public int widgetId;

@@ -333,11 +333,11 @@ public class TaskList extends Node {
         return this.mChildren;
     }
 
-    public void setIndex(int index) {
-        this.mIndex = index;
-    }
+//    public void setIndex(int index) {
+//        this.mIndex = index;
+//    }
 
-    public int getIndex() {
-        return this.mIndex;
-    }
+//    public int getIndex() {
+//        return this.mIndex;
+//    }
 }

@@ -60,7 +60,7 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
-/* 网络层工具类，对接谷歌日历/任务 */
+/** 网络层工具类，对接谷歌日历/任务 */
 public class GTaskClient {
     private static final String TAG = GTaskClient.class.getSimpleName();
 
@@ -101,14 +101,14 @@ public class GTaskClient {
         mAccount = null;
         mUpdateArray = null;
     }
-    /* 拿单例 */
+    /** 拿单例 */
     public static synchronized GTaskClient getInstance() {
         if (mInstance == null) {
             mInstance = new GTaskClient();
         }
         return mInstance;
     }
-    /* 实现登录，如果超过5min就重新登录，返回登录是否成功 */
+    /** 实现登录，如果超过5min就重新登录，返回登录是否成功 */
     public boolean login(Activity activity) {
         // we suppose that the cookie would expire after 5 minutes
         // then we need to re-login
@@ -163,7 +163,7 @@ public class GTaskClient {
         mLoggedin = true;
         return true;
     }
-    /* 登录谷歌账号，invalidateToken指定是否释放令牌（应用程序有责任在令牌失效时释放令牌），使用了麻烦的AccountManager机制 */
+    /** 登录谷歌账号，invalidateToken指定是否释放令牌（应用程序有责任在令牌失效时释放令牌），使用了麻烦的AccountManager机制 */
     private String loginGoogleAccount(Activity activity, boolean invalidateToken) {
         String authToken;
         AccountManager accountManager = AccountManager.get(activity);
